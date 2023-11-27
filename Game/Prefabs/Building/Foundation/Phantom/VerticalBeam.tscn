@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfhqlpthofx32"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1jo4x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsrl0"]
+albedo_color = Color(0.407843, 0.196078, 0.0431373, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vcr8j"]
+height = 4.01142
+
+[node name="VerticalBeam" type="StaticBody3D"]
+collision_layer = 9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("CylinderMesh_1jo4x")
+surface_material_override/0 = SubResource("StandardMaterial3D_tsrl0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CylinderShape3D_vcr8j")

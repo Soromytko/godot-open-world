@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://b1uwudfm0vnol"]
+
+[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/Picker.gd" id="2"]
+[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="3"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.gd" id="4_pehtr"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerIdleState.gd" id="5_n5ldg"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerJumpState.gd" id="6_ckhfm"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerWalkState.gd" id="6_kotiy"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerBuildState.gd" id="8_o68gi"]
+
+[sub_resource type="CapsuleMesh" id="1"]
+
+[sub_resource type="BoxMesh" id="7"]
+
+[sub_resource type="CapsuleShape3D" id="2"]
+height = 2.98644
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1")
+walk_speed = null
+sprint_speed = null
+rotation_speed = null
+jump_force = null
+gravity = null
+
+[node name="Skin" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Skin"]
+transform = Transform3D(0.5, 0, 0, 0, 0.297825, 1.91098e-09, 0, 8.49321e-10, 0.32697, 0, 0.612412, -0.497941)
+mesh = SubResource("7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("2")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1.5, 0, 1, -6.55671e-08, 0, 2, 0)
+shape = SubResource("2")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("3")
+
+[node name="Hand" type="Node3D" parent="."]
+transform = Transform3D(0.999999, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 0.999999, 1.19421, 2.63144, -0.556871)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(0.999999, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 0.999999, 0, 2.866, 0)
+target_position = Vector3(0, 0, -5)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_pehtr")
+initial_state = NodePath("PlayerIdleState")
+
+[node name="PlayerIdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("5_n5ldg")
+player = NodePath("../..")
+
+[node name="PlayerJumpState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("6_ckhfm")
+player = NodePath("../..")
+
+[node name="PlayerWalkState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("6_kotiy")
+player = NodePath("../..")
+
+[node name="PlayerBuildState" type="Node" parent="StateMachine"]
+script = ExtResource("8_o68gi")
+
+[connection signal="area_entered" from="Area3D" to="Area3D" method="_on_Area_area_entered"]
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_Area_body_entered"]

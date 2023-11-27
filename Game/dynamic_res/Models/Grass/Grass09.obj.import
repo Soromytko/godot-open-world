@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bo3pwxchfilg4"
+path="res://.godot/imported/Grass09.obj-93578985f728969a534e387b1b3a19f6.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Grass09.obj-93578985f728969a534e387b1b3a19f6.mesh"]
+
+source_file="res://dynamic_res/Models/Grass/Grass09.obj"
+dest_files=["res://.godot/imported/Grass09.obj-93578985f728969a534e387b1b3a19f6.mesh", "res://.godot/imported/Grass09.obj-93578985f728969a534e387b1b3a19f6.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqensq7e1h7cs"]
+
+[ext_resource type="ArrayMesh" uid="uid://c667l4hknl601" path="res://dynamic_res/Models/Tree03/Tree03.obj" id="1_kj7y6"]
+[ext_resource type="Texture2D" uid="uid://dvnudmnc67jbj" path="res://dynamic_res/Models/Tree03/TexturesCom_SoilSand0046_1_seamless_S.jpg" id="2_48ebg"]
+[ext_resource type="Texture2D" uid="uid://dekdqexn31216" path="res://dynamic_res/Models/Tree03/2237f4d60830642a24d65276e7abe1e6.png" id="3_mkd2l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k3agx"]
+albedo_texture = ExtResource("2_48ebg")
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rgkrl"]
+transparency = 2
+alpha_scissor_threshold = 0.808
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("3_mkd2l")
+metallic_specular = 0.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mjis5"]
+radius = 0.521822
+height = 15.5232
+
+[node name="Tree03" type="StaticBody3D"]
+
+[node name="Tree03" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+mesh = ExtResource("1_kj7y6")
+surface_material_override/0 = SubResource("StandardMaterial3D_k3agx")
+surface_material_override/1 = SubResource("StandardMaterial3D_rgkrl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.4749, 0)
+shape = SubResource("CapsuleShape3D_mjis5")

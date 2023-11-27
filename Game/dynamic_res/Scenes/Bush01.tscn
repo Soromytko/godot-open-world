@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://2d24msyrxvba"]
+
+[ext_resource type="ArrayMesh" uid="uid://d28x51vtm4hfp" path="res://dynamic_res/Models/Bushes/Bush01.obj" id="1_kwlk8"]
+[ext_resource type="Texture2D" uid="uid://dmtwxut78427a" path="res://dynamic_res/Models/Bushes/STBroadleaf_V3Branch.png" id="2_qencl"]
+[ext_resource type="Texture2D" uid="uid://cdbu065bq0kul" path="res://dynamic_res/Models/Bushes/STConifier_V1Branch.png" id="3_mb8tu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f0h4l"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("2_qencl")
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pmtvl"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("3_mb8tu")
+metallic_specular = 0.0
+
+[node name="Bush01" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0523276, 0, 0.141266)
+
+[node name="Bush01" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = ExtResource("1_kwlk8")
+surface_material_override/0 = SubResource("StandardMaterial3D_f0h4l")
+surface_material_override/1 = SubResource("StandardMaterial3D_pmtvl")

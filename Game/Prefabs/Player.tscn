@@ -1,0 +1,109 @@
+[gd_scene load_steps=13 format=3 uid="uid://b1uwudfm0vnol"]
+
+[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/Picker.gd" id="2"]
+[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="3"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.gd" id="4_pehtr"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerIdleState.gd" id="5_n5ldg"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerJumpState.gd" id="6_ckhfm"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerWalkState.gd" id="6_kotiy"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerBuildState.gd" id="8_o68gi"]
+[ext_resource type="PackedScene" uid="uid://dk8xxep7smt1p" path="res://dynamic_res/Scenes/Characters/Knight.tscn" id="9_g1c24"]
+
+[sub_resource type="CapsuleMesh" id="1"]
+
+[sub_resource type="BoxMesh" id="7"]
+
+[sub_resource type="CapsuleShape3D" id="2"]
+height = 2.98644
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1")
+walk_speed = 1.5
+sprint_speed = 5.0
+rotation_speed = 7.0
+
+[node name="Skin" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 1.5, 0)
+visible = false
+mesh = SubResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Skin"]
+transform = Transform3D(0.5, 0, 0, 0, 0.297825, 1.91098e-09, 0, 8.49321e-10, 0.32697, 0, 0.612412, -0.497941)
+mesh = SubResource("7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("2")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1.5, 0, 1, -6.55671e-08, 0, 2, 0)
+shape = SubResource("2")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("3")
+
+[node name="Hand" type="Node3D" parent="."]
+transform = Transform3D(0.999999, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 0.999999, 1.19421, 2.63144, -0.556871)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(0.999999, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 0.999999, 0, 2.866, 0)
+target_position = Vector3(0, 0, -5)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_pehtr")
+initial_state = NodePath("PlayerIdleState")
+
+[node name="PlayerIdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree")]
+script = ExtResource("5_n5ldg")
+player = NodePath("../..")
+animation_tree = NodePath("../../Knight/AnimationTree")
+
+[node name="PlayerJumpState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("6_ckhfm")
+player = NodePath("../..")
+
+[node name="PlayerWalkState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree")]
+script = ExtResource("6_kotiy")
+player = NodePath("../..")
+animation_tree = NodePath("../../Knight/AnimationTree")
+
+[node name="PlayerBuildState" type="Node" parent="StateMachine"]
+script = ExtResource("8_o68gi")
+
+[node name="Knight" parent="." instance=ExtResource("9_g1c24")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Knight/Armature" index="0"]
+bones/0/position = Vector3(0.948235, -0.351918, -80.4357)
+bones/0/rotation = Quaternion(-0.641638, -0.135187, 0.16335, 0.737117)
+bones/1/rotation = Quaternion(0.0175226, 0.0874922, -0.0186232, 0.995837)
+bones/2/rotation = Quaternion(0.0143238, 0.0249452, 0.0196794, 0.999393)
+bones/3/rotation = Quaternion(0.0576813, 0.0257228, 0.00764165, 0.997974)
+bones/4/rotation = Quaternion(-0.0366631, 0.161913, -0.0284526, 0.985713)
+bones/5/rotation = Quaternion(-0.0305474, 0.357054, -0.0813315, 0.930035)
+bones/9/rotation = Quaternion(0.570381, 0.406785, -0.543793, 0.46204)
+bones/10/rotation = Quaternion(0.375786, 0.195876, 0.201844, 0.882993)
+bones/11/rotation = Quaternion(0.0905391, -0.165363, 0.719716, 0.668181)
+bones/12/rotation = Quaternion(0.0927587, 0.00929142, -0.00713832, 0.99562)
+bones/34/rotation = Quaternion(0.426196, -0.476181, 0.650964, 0.409702)
+bones/35/rotation = Quaternion(0.358025, 0.0674527, 0.124949, 0.922852)
+bones/36/rotation = Quaternion(0.0429561, 0.032509, -0.658493, 0.750657)
+bones/37/rotation = Quaternion(0.0214481, 0.00320952, -0.099803, 0.994771)
+bones/59/rotation = Quaternion(0.0975399, 0.461484, 0.877817, -0.0833954)
+bones/60/rotation = Quaternion(-0.341337, 0.0918497, 0.00878244, 0.935401)
+bones/61/rotation = Quaternion(0.35362, -0.0226402, -0.121231, 0.927223)
+bones/64/rotation = Quaternion(-0.501686, 0.100545, 0.813576, 0.27622)
+bones/65/rotation = Quaternion(-0.364324, -0.036855, -0.0316956, 0.930003)
+bones/66/rotation = Quaternion(0.537584, 0.0897838, 0.274953, 0.79205)
+
+[connection signal="area_entered" from="Area3D" to="Area3D" method="_on_Area_area_entered"]
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_Area_body_entered"]
+
+[editable path="Knight"]

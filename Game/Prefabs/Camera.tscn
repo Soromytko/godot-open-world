@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq87e5wf0o3k0"]
+
+[ext_resource type="Script" path="res://Scripts/ThirdPersonCamera.gd" id="1_ri10d"]
+[ext_resource type="Script" path="res://Scripts/Builder.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://pif06877040i" path="res://Prefabs/Building/Building.tscn" id="3_qjnxu"]
+
+[sub_resource type="Environment" id="Environment_nm83q"]
+background_color = Color(0, 1, 1, 1)
+ambient_light_color = Color(0.243137, 0.243137, 0.243137, 1)
+
+[node name="CameraController" type="Node3D"]
+script = ExtResource("1_ri10d")
+v_min = -85
+
+[node name="Pivot" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+spring_length = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="Pivot"]
+transform = Transform3D(1, -1.49012e-08, -2.98023e-08, 1.49012e-08, 1, -5.96046e-08, 2.98023e-08, 5.96046e-08, 1, 0, 1, 10)
+environment = SubResource("Environment_nm83q")
+far = 500.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Pivot/Camera3D"]
+transform = Transform3D(1, -2.75286e-21, 0, -2.75286e-21, 1, 0, 0, 0, 1, 0, 3, 0)
+target_position = Vector3(0, 0, -50)
+script = ExtResource("2")
+
+[node name="Building" parent="Pivot/Camera3D" instance=ExtResource("3_qjnxu")]
+transform = Transform3D(1, -2.75286e-21, 0, -2.75286e-21, 1, 0, 0, 0, 1, 0, 3, 0)

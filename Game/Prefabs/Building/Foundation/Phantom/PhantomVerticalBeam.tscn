@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://chtcbnwsq4mun"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1jo4x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsrl0"]
+transparency = 1
+albedo_color = Color(0.407843, 0.196078, 0.0431373, 0.27451)
+
+[node name="VerticalBeam" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("CylinderMesh_1jo4x")
+surface_material_override/0 = SubResource("StandardMaterial3D_tsrl0")

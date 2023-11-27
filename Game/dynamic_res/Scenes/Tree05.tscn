@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwblncqk8pnon"]
+
+[ext_resource type="ArrayMesh" uid="uid://cwjmiwriedjif" path="res://dynamic_res/Models/Tree03/Tree05.obj" id="1_qgm1u"]
+[ext_resource type="Material" uid="uid://dim62f34petwk" path="res://dynamic_res/Models/Tree03/Trunk.tres" id="2_g6huf"]
+[ext_resource type="Material" uid="uid://bpnm3k6fo5d0w" path="res://dynamic_res/Models/Tree03/Foliage.tres" id="3_jpjuk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_52vqx"]
+radius = 0.0728651
+height = 3.83992
+
+[node name="Tree05" type="StaticBody3D"]
+
+[node name="Tree05" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_qgm1u")
+surface_material_override/0 = ExtResource("2_g6huf")
+surface_material_override/1 = ExtResource("3_jpjuk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8881, 0)
+shape = SubResource("CapsuleShape3D_52vqx")

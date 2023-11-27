@@ -1,0 +1,188 @@
+[gd_scene load_steps=18 format=3 uid="uid://dyvjpmjho3cf0"]
+
+[ext_resource type="PackedScene" path="res://Prefabs/Axe.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://b1uwudfm0vnol" path="res://Prefabs/Player.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://bq87e5wf0o3k0" path="res://Prefabs/Camera.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://c03xlpkjf1lpg" path="res://LeafIcon.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://c3kaubwffcxmd" path="res://WoodIcon.png" id="7"]
+[ext_resource type="PackedScene" uid="uid://b2drksn716ihc" path="res://Prefabs/Tree.tscn" id="8"]
+[ext_resource type="Script" path="res://Scripts/TreesGenerator.gd" id="9"]
+[ext_resource type="PackedScene" path="res://Prefabs/Boar.tscn" id="10"]
+[ext_resource type="Script" path="res://Scripts/HeightMapTexture.gd" id="12"]
+[ext_resource type="Script" path="res://Scripts/TerrainGenerator.gd" id="13"]
+[ext_resource type="Script" path="res://Scenes/Environment.gd" id="14"]
+
+[sub_resource type="ArrayMesh" id="5"]
+_surfaces = [{
+"aabb": AABB(0, 0.00580573, 0, 10.6667, 0.115761, 10.6667),
+"format": 4099,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 23, 0),
+"primitive": 3,
+"vertex_count": 24,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 4, 62, 190, 59, 0, 0, 0, 0, 150, 253, 191, 126, 171, 170, 170, 64, 148, 4, 113, 61, 0, 0, 0, 0, 150, 253, 191, 126, 0, 0, 0, 0, 70, 223, 98, 61, 171, 170, 170, 64, 150, 253, 191, 126, 171, 170, 170, 64, 148, 4, 113, 61, 0, 0, 0, 0, 251, 252, 114, 126, 171, 170, 170, 64, 5, 248, 248, 61, 171, 170, 170, 64, 251, 252, 114, 126, 0, 0, 0, 0, 70, 223, 98, 61, 171, 170, 170, 64, 251, 252, 114, 126, 0, 0, 0, 0, 70, 223, 98, 61, 171, 170, 170, 64, 112, 254, 19, 126, 171, 170, 170, 64, 5, 248, 248, 61, 171, 170, 170, 64, 112, 254, 19, 126, 0, 0, 0, 0, 118, 43, 37, 61, 171, 170, 42, 65, 112, 254, 19, 126, 171, 170, 170, 64, 5, 248, 248, 61, 171, 170, 170, 64, 22, 255, 19, 126, 171, 170, 170, 64, 53, 208, 161, 61, 171, 170, 42, 65, 22, 255, 19, 126, 0, 0, 0, 0, 118, 43, 37, 61, 171, 170, 42, 65, 22, 255, 19, 126, 171, 170, 170, 64, 148, 4, 113, 61, 0, 0, 0, 0, 155, 1, 224, 127, 171, 170, 42, 65, 186, 90, 92, 61, 0, 0, 0, 0, 155, 1, 224, 127, 171, 170, 170, 64, 5, 248, 248, 61, 171, 170, 170, 64, 155, 1, 224, 127, 171, 170, 42, 65, 186, 90, 92, 61, 0, 0, 0, 0, 155, 1, 136, 126, 171, 170, 42, 65, 226, 194, 116, 61, 171, 170, 170, 64, 155, 1, 136, 126, 171, 170, 170, 64, 5, 248, 248, 61, 171, 170, 170, 64, 155, 1, 136, 126, 171, 170, 170, 64, 5, 248, 248, 61, 171, 170, 170, 64, 116, 1, 138, 125, 171, 170, 42, 65, 226, 194, 116, 61, 171, 170, 170, 64, 116, 1, 138, 125, 171, 170, 170, 64, 53, 208, 161, 61, 171, 170, 42, 65, 116, 1, 138, 125, 171, 170, 42, 65, 226, 194, 116, 61, 171, 170, 170, 64, 25, 1, 64, 126, 171, 170, 42, 65, 107, 74, 5, 61, 171, 170, 42, 65, 25, 1, 64, 126, 171, 170, 170, 64, 53, 208, 161, 61, 171, 170, 42, 65, 25, 1, 64, 126)
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r2sk"]
+albedo_color = Color(0.145098, 0.878431, 0, 1)
+
+[sub_resource type="PlaneMesh" id="3"]
+
+[sub_resource type="Image" id="Image_wcbpn"]
+data = {
+"data": PackedByteArray(0, 0, 0, 7, 7, 7, 6, 6, 6, 7, 7, 7, 15, 15, 15, 7, 7, 7, 5, 5, 5, 10, 10, 10, 4, 4, 4),
+"format": "RGB8",
+"height": 3,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="7"]
+image = SubResource("Image_wcbpn")
+
+[sub_resource type="ConcavePolygonShape3D" id="8"]
+data = PackedVector3Array(0, 0.0058, 0, 5.3333, 0.0588, 0, 0, 0.0554, 5.3333, 5.3333, 0.0588, 0, 5.3333, 0.1216, 5.3333, 0, 0.0554, 5.3333, 0, 0.0554, 5.3333, 5.3333, 0.1216, 5.3333, 0, 0.0403, 10.6667, 5.3333, 0.1216, 5.3333, 5.3333, 0.079, 10.6667, 0, 0.0403, 10.6667, 5.3333, 0.0588, 0, 10.6667, 0.0538, 0, 5.3333, 0.1216, 5.3333, 10.6667, 0.0538, 0, 10.6667, 0.0598, 5.3333, 5.3333, 0.1216, 5.3333, 5.3333, 0.1216, 5.3333, 10.6667, 0.0598, 5.3333, 5.3333, 0.079, 10.6667, 10.6667, 0.0598, 5.3333, 10.6667, 0.0325, 10.6667, 5.3333, 0.079, 10.6667)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="ThirdPersonCamera" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.057, -0.912797, -0.555517)
+
+[node name="Player" parent="." instance=ExtResource("3")]
+transform = Transform3D(0.422618, 0, 0.906308, 0, 1, 0, -0.906308, 0, 0.422618, 64.055, 102.815, 57.536)
+
+[node name="Axe" parent="Player" instance=ExtResource("2")]
+
+[node name="Tree" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.0743, 0, 7.52273)
+
+[node name="TreesGenerator" type="Node3D" parent="."]
+script = ExtResource("9")
+
+[node name="Boar" parent="." instance=ExtResource("10")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 149.683, 0.87337, 27.7822)
+visible = false
+
+[node name="Environment" type="Node3D" parent="."]
+script = ExtResource("14")
+
+[node name="Terrain" type="StaticBody3D" parent="Environment"]
+script = ExtResource("13")
+width = 600
+depth = 600
+smoothing = 7.0
+is_random_seed = true
+height = 150
+default_seed = "{hour:11, minute:15, second:20}"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Terrain"]
+mesh = SubResource("5")
+surface_material_override/0 = SubResource("StandardMaterial3D_7r2sk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Terrain/MeshInstance3D"]
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 8, 8, 10, 8)
+mesh = SubResource("3")
+
+[node name="Control" type="Control" parent="Environment/Terrain"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Environment/Terrain/Control"]
+layout_mode = 0
+offset_left = 887.0
+offset_top = 6.0
+offset_right = 1016.0
+offset_bottom = 135.0
+texture = SubResource("7")
+script = ExtResource("12")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Terrain"]
+shape = SubResource("8")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+visible = false
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 52.0
+color = Color(0.321569, 0.309804, 0.309804, 0.470588)
+
+[node name="Foliage" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 46.0
+offset_right = 844.0
+offset_bottom = 618.0
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("5")
+
+[node name="Wood" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 72.0
+offset_right = 513.0
+offset_bottom = 584.0
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("7")
+
+[node name="LeafCount" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 90.0
+offset_bottom = 64.0
+text = "0"
+
+[node name="WoodCount" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 85.0
+offset_right = 90.0
+offset_bottom = 99.0
+text = "0"
+
+[node name="Health" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 208.0
+offset_bottom = 18.0
+pivot_offset = Vector2(100, 5)
+
+[node name="Bar" type="ColorRect" parent="Control/Health"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 199.0
+offset_bottom = 9.0
+pivot_offset = Vector2(0, 4)
+color = Color(1, 0.223529, 0.223529, 1)
+
+[node name="Stamina" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 208.0
+offset_bottom = 34.0
+pivot_offset = Vector2(100, 5)
+
+[node name="Bar" type="ColorRect" parent="Control/Stamina"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 199.0
+offset_bottom = 9.0
+pivot_offset = Vector2(0, 4)
+color = Color(1, 0.913725, 0.223529, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.347842, -0.476769, -0.807278, 0.916346, 0.354986, 0.185188, 0.19828, -0.804162, 0.560364, -0.417305, 45.9492, 23.7704)
+
+[node name="Builder" type="Node" parent="."]

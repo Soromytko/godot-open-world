@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7jake3jwj74c"]
+
+[ext_resource type="Script" path="res://Scripts/FreeCamera.gd" id="1_2f3wr"]
+
+[sub_resource type="Sky" id="Sky_idaoi"]
+
+[sub_resource type="Environment" id="Environment_74lpb"]
+background_mode = 1
+background_color = Color(0.6, 0.729412, 1, 1)
+sky = SubResource("Sky_idaoi")
+
+[node name="FreeCamera3D" type="Camera3D"]
+transform = Transform3D(0.791224, -0.100931, 0.60314, 0, 0.986286, 0.165048, -0.611527, -0.13059, 0.780373, 0, 0, 0)
+environment = SubResource("Environment_74lpb")
+script = ExtResource("1_2f3wr")

@@ -1,0 +1,94 @@
+[gd_scene load_steps=6 format=2]
+
+[sub_resource type="SphereShape3D" id=1]
+
+[sub_resource type="StandardMaterial3D" id=3]
+albedo_color = Color( 0.72549, 0.439216, 0.188235, 1 )
+
+[sub_resource type="BoxMesh" id=2]
+
+[sub_resource type="StandardMaterial3D" id=4]
+albedo_color = Color( 0.72549, 0.439216, 0.188235, 1 )
+
+[sub_resource type="StandardMaterial3D" id=5]
+albedo_color = Color( 0.72549, 0.439216, 0.188235, 1 )
+
+[node name="Boar" type="RigidBody3D"]
+mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Armature" type="Node3D" parent="CollisionShape3D"]
+
+[node name="Body" type="Node3D" parent="CollisionShape3D/Armature"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.807399, 0 )
+
+[node name="Body" type="MeshInstance3D" parent="CollisionShape3D/Armature/Body"]
+transform = Transform3D( 0.521737, 0, 0, 0, 0.209992, 0, 0, 0, 0.274758, 0, -0.17679, 0 )
+material_override = SubResource( 3 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../..")
+
+[node name="BackLeg_L" type="Node3D" parent="CollisionShape3D/Armature/Body"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.307371, -0.0333627, -0.287886 )
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/Armature/Body/BackLeg_L"]
+transform = Transform3D( 0.1, 0, 0, 0, 0.4, 0, 0, 0, 0.1, 0, -0.4, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../Body")
+material/0 = SubResource( 4 )
+
+[node name="BackLeg_R" type="Node3D" parent="CollisionShape3D/Armature/Body"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.307006, -0.033, 0.288 )
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/Armature/Body/BackLeg_R"]
+transform = Transform3D( 0.1, 0, 0, 0, 0.4, 0, 0, 0, 0.1, 0, -0.4, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../Body")
+material/0 = SubResource( 4 )
+
+[node name="FrontLeg_L" type="Node3D" parent="CollisionShape3D/Armature/Body"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365036, -0.0333627, -0.208396 )
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/Armature/Body/FrontLeg_L"]
+transform = Transform3D( 0.1, 0, 0, 0, 0.4, 0, 0, 0, 0.1, 0, -0.4, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../Body")
+material/0 = SubResource( 4 )
+
+[node name="FrontLeg_R" type="Node3D" parent="CollisionShape3D/Armature/Body"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36526, -0.033, 0.208 )
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/Armature/Body/FrontLeg_R"]
+transform = Transform3D( 0.1, 0, 0, 0, 0.4, 0, 0, 0, 0.1, 0, -0.4, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../Body")
+material/0 = SubResource( 4 )
+
+[node name="Neck" type="Node3D" parent="CollisionShape3D/Armature/Body"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492, -0.174, 0 )
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/Armature/Body/Neck"]
+transform = Transform3D( 0.123, 0, 0, 0, 0.2, 0, 0, 0, 0.192, 0.123, 0, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../Body")
+material/0 = SubResource( 5 )
+
+[node name="Head" type="Node3D" parent="CollisionShape3D/Armature/Body/Neck"]
+transform = Transform3D( 1, -0.000643843, -0.00026946, 0.000643839, 1, -1.57402e-05, 0.00026947, 1.55705e-05, 1, 0.0733569, -0.0179663, 1.41086e-05 )
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/Armature/Body/Neck/Head"]
+transform = Transform3D( 0.225, 0, 0, 0, 0.226942, 0, 0, 0, 0.225, 0.225, 0, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../../Body")
+material/0 = SubResource( 5 )
+
+[node name="Tail" type="Node3D" parent="CollisionShape3D/Armature/Body"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.504, 0.0482489, 0 )
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/Armature/Body/Tail"]
+transform = Transform3D( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -0.05, 0, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../Body")
+material/0 = SubResource( 5 )

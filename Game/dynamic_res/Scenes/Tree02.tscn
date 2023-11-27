@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://dx4ccd8fo7eyi"]
+
+[ext_resource type="ArrayMesh" uid="uid://8k5knmqn88nj" path="res://dynamic_res/Models/Tree02/Tree03.obj" id="1_xnddy"]
+[ext_resource type="Texture2D" uid="uid://bdbthployfnri" path="res://dynamic_res/Models/Tree02/foliage_fir.png" id="2_0q7tp"]
+[ext_resource type="Texture2D" uid="uid://dreaovkfjwl6j" path="res://dynamic_res/Models/Tree02/bark_fir.png" id="3_1mqu5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lbjvc"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("2_0q7tp")
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qany4"]
+albedo_texture = ExtResource("3_1mqu5")
+metallic_specular = 0.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qpxlf"]
+height = 15.0932
+
+[node name="Tree02" type="StaticBody3D"]
+
+[node name="Tree02" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_xnddy")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_lbjvc")
+surface_material_override/1 = SubResource("StandardMaterial3D_qany4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.65632, 0)
+shape = SubResource("CapsuleShape3D_qpxlf")
