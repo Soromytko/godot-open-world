@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://budennsvebvy8"]
+
+[ext_resource type="PackedScene" uid="uid://c7jake3jwj74c" path="res://dynamic_res/Scenes/FreeCamera3D.tscn" id="1_ekfgk"]
+[ext_resource type="Script" path="res://Modules/OpenWorld/Scripts/OWWorldComposition.gd" id="2_p0sey"]
+[ext_resource type="Script" path="res://Modules/OpenWorld/Scripts/OWChunkManager.gd" id="3_lhw7m"]
+[ext_resource type="PackedScene" uid="uid://y148n251mvup" path="res://Modules/OpenWorld/OWChunk.tscn" id="4_ui3k2"]
+
+[node name="ChunksDemo" type="Node3D"]
+
+[node name="FreeCamera3D" parent="." instance=ExtResource("1_ekfgk")]
+transform = Transform3D(0.791224, -0.100931, 0.60314, 0, 0.986286, 0.165048, -0.611527, -0.13059, 0.780373, 1.88348, 2.73432, 2.67048)
+
+[node name="OWWorldComposition" type="Node3D" parent="." node_paths=PackedStringArray("chunk_manager", "observer")]
+script = ExtResource("2_p0sey")
+chunk_manager = NodePath("OWChunkManager")
+observer = NodePath("../FreeCamera3D")
+chunk_size = Vector3i(2, 1, 2)
+viewing_radius = null
+
+[node name="OWChunkManager" type="Node3D" parent="OWWorldComposition"]
+script = ExtResource("3_lhw7m")
+chunk_scene = ExtResource("4_ui3k2")
