@@ -1,19 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://cefoujnac15t6"]
+[gd_scene load_steps=8 format=3 uid="uid://cefoujnac15t6"]
 
+[ext_resource type="Script" path="res://Modules/OpenWorld/Scripts/OWLODGroup.gd" id="1_bxx1f"]
 [ext_resource type="ArrayMesh" uid="uid://cmc1tx22oud11" path="res://dynamic_res/Models/Tree03/Tree08.obj" id="1_kttrw"]
 [ext_resource type="Material" uid="uid://dim62f34petwk" path="res://dynamic_res/Models/Tree03/Trunk.tres" id="2_igqye"]
 [ext_resource type="Material" uid="uid://bpnm3k6fo5d0w" path="res://dynamic_res/Models/Tree03/Foliage.tres" id="3_2uavt"]
+[ext_resource type="PackedScene" uid="uid://dhdly31xfoddh" path="res://dynamic_res/Scenes/tree_lod_1.tscn" id="5_34djx"]
+[ext_resource type="PackedScene" uid="uid://bn8jw1istf1cy" path="res://dynamic_res/tree_lod_2.tscn" id="6_hl4ks"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xdmjx"]
 radius = 0.125568
 height = 5.4645
 
-[node name="Tree08" type="StaticBody3D"]
+[node name="Tree08" type="StaticBody3D" node_paths=PackedStringArray("LODs")]
+script = ExtResource("1_bxx1f")
+LODs = [NodePath("Tree08"), NodePath("LOD1"), null]
 
 [node name="Tree08" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_kttrw")
 surface_material_override/0 = ExtResource("2_igqye")
 surface_material_override/1 = ExtResource("3_2uavt")
+
+[node name="LOD1" parent="." instance=ExtResource("5_34djx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+
+[node name="TreeLOD2" parent="." instance=ExtResource("6_hl4ks")]
+transform = Transform3D(9.4827, 0, 0, 0, 9.4827, 0, 0, 0, 9.4827, 0, 0, 0)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.70766, 0)

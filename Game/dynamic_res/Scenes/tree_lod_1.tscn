@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhdly31xfoddh"]
+
+[ext_resource type="ArrayMesh" uid="uid://cmc1tx22oud11" path="res://dynamic_res/Models/Tree03/Tree08.obj" id="1_f0hud"]
+[ext_resource type="Material" uid="uid://dim62f34petwk" path="res://dynamic_res/Models/Tree03/Trunk.tres" id="2_t5mty"]
+[ext_resource type="Material" uid="uid://bpnm3k6fo5d0w" path="res://dynamic_res/Models/Tree03/Foliage.tres" id="3_g63gf"]
+
+[node name="TreeLOD1" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.53373, 0, 7.07335)
+mesh = ExtResource("1_f0hud")
+surface_material_override/0 = ExtResource("2_t5mty")
+surface_material_override/1 = ExtResource("3_g63gf")
