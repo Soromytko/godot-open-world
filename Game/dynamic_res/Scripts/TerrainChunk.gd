@@ -3,6 +3,7 @@ class_name TerrainChunk extends Node3D
 var width : int = 10
 var depth : int = 10
 
+@export var grass : MultiMeshInstance3D
 
 func update_mesh(mesh):
 	$MeshInstance3D.mesh = mesh

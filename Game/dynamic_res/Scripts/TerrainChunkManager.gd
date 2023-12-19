@@ -5,6 +5,7 @@ extends Node3D
 @export var observed_radius : float = 10
 @export var observer : Node3D
 @export var chunk_scene : PackedScene
+@export var multi_grass : MultiMeshInstance3D
 
 var _chunks : Dictionary = {}
 var _noise : Noise = FastNoiseLite.new()
@@ -107,7 +108,33 @@ func _create_all_chunks(count):
 			add_child(instance)
 			instance.global_position = rand_pos
 			instance.scale *= item.scale
-			
+	
+	
+	for i in multi_grass.multimesh.instance_count:
+		var c = 40
+		var x_rand = rng.randf_range(0, c)
+		var z_rand = rng.randf_range(0, c)
+		var noise_vector = Vector2(x_rand, z_rand)
+		var y : float = _noise.get_noise_2dv(noise_vector / cell_size) * 10
+		y *= y
+		var rand_pos = Vector3(x_rand, y, z_rand)
+		
+		
+#		rand_pos = get_random_point.call()
+
+		rand_pos.y = 0
+		
+#		var instance = trees.pick_random().instantiate()
+#		add_child(instance)
+#		instance.global_position = rand_pos	
+		var t : Transform3D = Transform3D(Basis(), rand_pos)
+		t = t.scaled(Vector3.ONE * rng.randf_range(0.2, 0.5))
+		var v = (Vector3.RIGHT * rng.randf_range(0, 1) + Vector3.FORWARD * rng.randf_range(0, 1)).normalized()
+		var d = rng.randf_range(deg_to_rad(-30), deg_to_rad(30))
+		t = t.rotated(v, d)
+		t.origin = rand_pos
+		multi_grass.multimesh.set_instance_transform(i, t)
+
 
 
 func _process(delta):
