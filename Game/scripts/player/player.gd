@@ -2,8 +2,6 @@ class_name Player extends CharacterBody3D
 
 signal move_event(position)
 
-@export var camera : ThirdPersonCamera
-
 @export var walk_speed : float = 10
 @export var sprint_speed : float = 30
 @export var rotation_speed : float = 10
@@ -35,7 +33,6 @@ func move(speed : float):
 	velocity.x = _direction.x * speed
 	velocity.z = _direction.z * speed
 	move_and_slide()
-	camera.follow(transform.origin)
 	
 	
 var is_build_mode = false
@@ -66,15 +63,10 @@ func apply_gravity(force : float = gravity):
 func apply_velocity(velocity : Vector3 = self.velocity):
 	self.velocity = velocity
 	move_and_slide()
-	_move_camera()
 	
 
 func rotate_to_direction(direction : Vector3, speed : float):
 	rotation.y = lerp_angle(rotation.y, atan2(-direction.x, -direction.z), rotation_speed * speed)
-	
-	
-func _move_camera(target : Vector3 = self.transform.origin):
-	if camera: camera.follow(target)
 	
 	
 func _input(event):
@@ -86,11 +78,6 @@ func _input(event):
 					collider.destroy()
 				elif collider is Enemy:
 					collider.queue_freeА 
-		
-		
-func _ready():
-	if !camera:
-		camera = get_node("/root/Node3D/ThirdPersonCamera")
 		
 		
 func _process(delta):
@@ -110,8 +97,9 @@ func _process(delta):
 #	stamina.rect_scale.x = stamina_bar_value
 
 func get_relative_input(input : Vector3):
+	var camera = get_viewport().get_camera_3d()
 	if camera:
-		return camera.transform.basis.x * input.x + camera.transform.basis.z * input.z
+		return camera.global_transform.basis.x * input.x + camera.global_transform.basis.z * input.z
 	return input
 
 

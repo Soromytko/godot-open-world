@@ -17,7 +17,8 @@ map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 
 [node name="Node3D" type="Node3D"]
 
-[node name="ThirdPersonCamera" parent="." instance=ExtResource("2_16g2k")]
+[node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_16g2k")]
+target = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_d0q4b")]
 
