@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dqq1htsrpx51d"]
+[gd_scene load_steps=27 format=3 uid="uid://dqq1htsrpx51d"]
 
 [ext_resource type="Script" path="res://scripts/deprecated/TerrainChunkManager.gd" id="2_dflq0"]
 [ext_resource type="PackedScene" uid="uid://cews4xedq4er2" path="res://scenes/deprecated/TerrainChunk.tscn" id="3_ebmup"]
@@ -26,6 +26,10 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_eoq1u"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_8wjsc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_30n7y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qpvat"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -55,8 +59,31 @@ shape = SubResource("SphereShape3D_eoq1u")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D"]
 mesh = SubResource("SphereMesh_8wjsc")
 
-[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("21_y5ry1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.22484, 0, 7.85219)
-camera = NodePath("")
+[node name="Player" parent="." instance=ExtResource("21_y5ry1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.22484, 2.45185, 7.85219)
 
-[node name="ThirdPersonCamera" parent="." instance=ExtResource("22_r2che")]
+[node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("22_r2che")]
+target = NodePath("../Player")
+sharpness = 5.0
+_minimum_angle = -90
+_maximum_angle = 90
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(3.29659, 0, 0, 0, 3.27992, 0, 0, 0, 3.69863, 9.15667, 0.405175, 7.40891)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_30n7y")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_qpvat")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.36586, -0.201987, 0, 2.7981, -0.315159, 0, 0, 0, 3.69863, 12.8757, 0.497983, 7.36703)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+mesh = SubResource("BoxMesh_30n7y")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_qpvat")
