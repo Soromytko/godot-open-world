@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cori4306isj4q"]
+
+[ext_resource type="Script" path="res://scripts/Building/Beam.gd" id="1_8m6xf"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1jo4x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsrl0"]
+albedo_color = Color(0.407843, 0.196078, 0.0431373, 1)
+
+[node name="VerticalBeam" type="Node3D"]
+script = ExtResource("1_8m6xf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_1jo4x")
+surface_material_override/0 = SubResource("StandardMaterial3D_tsrl0")

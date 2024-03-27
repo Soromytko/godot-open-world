@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://cews4xedq4er2"]
+
+[ext_resource type="Script" path="res://scripts/deprecated/TerrainChunk.gd" id="1_xpuc7"]
+[ext_resource type="Texture2D" uid="uid://cpypk63cwkm6q" path="res://textures/ground.jpg" id="2_7sbb2"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_j5cgy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sr5ie"]
+albedo_texture = ExtResource("2_7sbb2")
+metallic_specular = 0.0
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_urko4"]
+
+[node name="TerrainChunk" type="StaticBody3D"]
+script = ExtResource("1_xpuc7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_j5cgy")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_sr5ie")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_urko4")

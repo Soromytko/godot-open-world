@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://cis0l7gyxuklg"]
+
+[ext_resource type="Script" path="res://scripts/TerrainGenerator.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/HeightMapTexture.gd" id="2"]
+
+[sub_resource type="ArrayMesh" id="6"]
+_surfaces = [{
+"aabb": AABB(0, 0.00580573, 0, 10.6667, 0.115761, 10.6667),
+"format": 34359742467,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 23, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 4, 62, 190, 59, 0, 0, 0, 0, 171, 170, 170, 64, 148, 4, 113, 61, 0, 0, 0, 0, 0, 0, 0, 0, 70, 223, 98, 61, 171, 170, 170, 64, 171, 170, 170, 64, 148, 4, 113, 61, 0, 0, 0, 0, 171, 170, 170, 64, 5, 248, 248, 61, 171, 170, 170, 64, 0, 0, 0, 0, 70, 223, 98, 61, 171, 170, 170, 64, 0, 0, 0, 0, 70, 223, 98, 61, 171, 170, 170, 64, 171, 170, 170, 64, 5, 248, 248, 61, 171, 170, 170, 64, 0, 0, 0, 0, 118, 43, 37, 61, 171, 170, 42, 65, 171, 170, 170, 64, 5, 248, 248, 61, 171, 170, 170, 64, 171, 170, 170, 64, 53, 208, 161, 61, 171, 170, 42, 65, 0, 0, 0, 0, 118, 43, 37, 61, 171, 170, 42, 65, 171, 170, 170, 64, 148, 4, 113, 61, 0, 0, 0, 0, 171, 170, 42, 65, 186, 90, 92, 61, 0, 0, 0, 0, 171, 170, 170, 64, 5, 248, 248, 61, 171, 170, 170, 64, 171, 170, 42, 65, 186, 90, 92, 61, 0, 0, 0, 0, 171, 170, 42, 65, 226, 194, 116, 61, 171, 170, 170, 64, 171, 170, 170, 64, 5, 248, 248, 61, 171, 170, 170, 64, 171, 170, 170, 64, 5, 248, 248, 61, 171, 170, 170, 64, 171, 170, 42, 65, 226, 194, 116, 61, 171, 170, 170, 64, 171, 170, 170, 64, 53, 208, 161, 61, 171, 170, 42, 65, 171, 170, 42, 65, 226, 194, 116, 61, 171, 170, 170, 64, 171, 170, 42, 65, 107, 74, 5, 61, 171, 170, 42, 65, 171, 170, 170, 64, 53, 208, 161, 61, 171, 170, 42, 65, 150, 253, 191, 126, 150, 253, 191, 126, 150, 253, 191, 126, 251, 252, 114, 126, 251, 252, 114, 126, 251, 252, 114, 126, 112, 254, 19, 126, 112, 254, 19, 126, 112, 254, 19, 126, 22, 255, 19, 126, 22, 255, 19, 126, 22, 255, 19, 126, 155, 1, 224, 127, 155, 1, 224, 127, 155, 1, 224, 127, 155, 1, 136, 126, 155, 1, 136, 126, 155, 1, 136, 126, 116, 1, 138, 125, 116, 1, 138, 125, 116, 1, 138, 125, 25, 1, 64, 126, 25, 1, 64, 126, 25, 1, 64, 126)
+}]
+
+[sub_resource type="PlaneMesh" id="4"]
+
+[sub_resource type="Image" id="Image_kfwwt"]
+data = {
+"data": PackedByteArray(0, 0, 0, 7, 7, 7, 6, 6, 6, 7, 7, 7, 15, 15, 15, 7, 7, 7, 5, 5, 5, 10, 10, 10, 4, 4, 4),
+"format": "RGB8",
+"height": 3,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="8"]
+image = SubResource("Image_kfwwt")
+
+[sub_resource type="ConcavePolygonShape3D" id="9"]
+data = PackedVector3Array(0, 0.0058, 0, 5.3333, 0.0588, 0, 0, 0.0554, 5.3333, 5.3333, 0.0588, 0, 5.3333, 0.1216, 5.3333, 0, 0.0554, 5.3333, 0, 0.0554, 5.3333, 5.3333, 0.1216, 5.3333, 0, 0.0403, 10.6667, 5.3333, 0.1216, 5.3333, 5.3333, 0.079, 10.6667, 0, 0.0403, 10.6667, 5.3333, 0.0588, 0, 10.6667, 0.0538, 0, 5.3333, 0.1216, 5.3333, 10.6667, 0.0538, 0, 10.6667, 0.0598, 5.3333, 5.3333, 0.1216, 5.3333, 5.3333, 0.1216, 5.3333, 10.6667, 0.0598, 5.3333, 5.3333, 0.079, 10.6667, 10.6667, 0.0598, 5.3333, 10.6667, 0.0325, 10.6667, 5.3333, 0.079, 10.6667)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Terrain" type="StaticBody3D" parent="."]
+script = ExtResource("1")
+width = 100
+depth = 100
+smoothing = 7.0
+height = 50
+default_seed = "{hour:10, minute:36, second:33}"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain"]
+mesh = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/MeshInstance3D"]
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 8, 8, 10, 8)
+mesh = SubResource("4")
+
+[node name="Control" type="Control" parent="Terrain"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Terrain/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("8")
+script = ExtResource("2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain"]
+shape = SubResource("9")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.609264, -0.0241199, -0.7926, 0.383896, -0.865621, 0.32144, -0.693845, -0.500118, -0.518133, 0, 3.28451, 0)

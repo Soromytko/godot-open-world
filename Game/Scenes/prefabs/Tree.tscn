@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2drksn716ihc"]
+
+[ext_resource type="Script" path="res://scripts/WoodTree.gd" id="1"]
+
+[sub_resource type="CylinderMesh" id="1"]
+
+[sub_resource type="CapsuleMesh" id="3"]
+
+[sub_resource type="CylinderShape3D" id="5"]
+
+[node name="Tree" type="StaticBody3D"]
+script = ExtResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 6.5, 0, 0, 0, 1, 0, 4, 0)
+mesh = SubResource("1")
+
+[node name="MeshInstance2" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, -1.31134e-07, -5, 0, 3, -2.18557e-07, 0, 15.2858, 0)
+mesh = SubResource("3")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("5")

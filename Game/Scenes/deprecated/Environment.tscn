@@ -1,0 +1,68 @@
+[gd_scene load_steps=15 format=3 uid="uid://b0bccw85micf8"]
+
+[ext_resource type="PackedScene" uid="uid://c7jake3jwj74c" path="res://scenes/prefabs/camera/free_camera.tscn" id="1_rt7ek"]
+[ext_resource type="Texture2D" uid="uid://cpypk63cwkm6q" path="res://textures/ground.jpg" id="2_0bsg8"]
+[ext_resource type="ArrayMesh" uid="uid://cs5jvqg0hglx4" path="res://models/Tree01/Tree01.obj" id="3_ha0ms"]
+[ext_resource type="Texture2D" uid="uid://dk3hu165dxh0g" path="res://models/Tree01/Foliage512.png" id="4_1u1h6"]
+[ext_resource type="Texture2D" uid="uid://l1r25wfxk10i" path="res://models/Tree01/bark.png" id="5_qbcup"]
+[ext_resource type="ArrayMesh" uid="uid://8k5knmqn88nj" path="res://models/Tree02/Tree03.obj" id="6_x4mg0"]
+[ext_resource type="Texture2D" uid="uid://bdbthployfnri" path="res://models/Tree02/foliage_fir.png" id="7_x8fei"]
+[ext_resource type="Texture2D" uid="uid://dreaovkfjwl6j" path="res://models/Tree02/bark_fir.png" id="8_0dk33"]
+
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tvy72"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fsq1d"]
+albedo_color = Color(0.933333, 0.933333, 0.933333, 1)
+albedo_texture = ExtResource("2_0bsg8")
+metallic_specular = 0.0
+emission_enabled = true
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajx7k"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("4_1u1h6")
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_27wes"]
+albedo_color = Color(0.67451, 0.572549, 0.443137, 1)
+albedo_texture = ExtResource("5_qbcup")
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lbjvc"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("7_x8fei")
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qany4"]
+albedo_texture = ExtResource("8_0dk33")
+metallic_specular = 0.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="FreeCamera3D" parent="." instance=ExtResource("1_rt7ek")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.590492, -0.769883, 0.242075, 0.436433, 0.556932, 0.706649, -0.678856, -0.311622, 0.664866, 5, 15, 8.8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("PlaneMesh_tvy72")
+surface_material_override/0 = SubResource("StandardMaterial3D_fsq1d")
+
+[node name="Tree01" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.45121, -1.43051e-06, -11.1197)
+mesh = ExtResource("3_ha0ms")
+surface_material_override/0 = SubResource("StandardMaterial3D_ajx7k")
+surface_material_override/1 = SubResource("StandardMaterial3D_27wes")
+
+[node name="Tree02" type="MeshInstance3D" parent="."]
+mesh = ExtResource("6_x4mg0")
+surface_material_override/0 = SubResource("StandardMaterial3D_lbjvc")
+surface_material_override/1 = SubResource("StandardMaterial3D_qany4")

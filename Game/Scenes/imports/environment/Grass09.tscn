@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce385hvcejxva"]
+
+[ext_resource type="ArrayMesh" uid="uid://bo3pwxchfilg4" path="res://models/Grass/Grass09.obj" id="1_8a1pt"]
+[ext_resource type="Material" uid="uid://bj5u7nt3gbcdo" path="res://models/Grass/Grass02.tres" id="2_panc8"]
+
+[node name="Grass09" type="Node3D"]
+
+[node name="Grass09" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_8a1pt")
+surface_material_override/0 = ExtResource("2_panc8")

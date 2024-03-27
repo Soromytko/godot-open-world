@@ -1,0 +1,62 @@
+[gd_scene load_steps=25 format=3 uid="uid://dqq1htsrpx51d"]
+
+[ext_resource type="Script" path="res://scripts/deprecated/TerrainChunkManager.gd" id="2_dflq0"]
+[ext_resource type="PackedScene" uid="uid://cews4xedq4er2" path="res://scenes/deprecated/TerrainChunk.tscn" id="3_ebmup"]
+[ext_resource type="PackedScene" uid="uid://bwblncqk8pnon" path="res://scenes/imports/environment/Tree05.tscn" id="5_3jp6s"]
+[ext_resource type="PackedScene" uid="uid://sstdsce0gin0" path="res://scenes/imports/environment/Tree04.tscn" id="5_3mrif"]
+[ext_resource type="PackedScene" uid="uid://cp5mnndsjiu0x" path="res://scenes/imports/environment/Tree06.tscn" id="6_dkp30"]
+[ext_resource type="PackedScene" uid="uid://d356vdoahaxxa" path="res://scenes/imports/environment/Tree07.tscn" id="7_titch"]
+[ext_resource type="PackedScene" uid="uid://cefoujnac15t6" path="res://scenes/imports/environment/Tree08.tscn" id="8_p6v2n"]
+[ext_resource type="PackedScene" uid="uid://doksd18veu37o" path="res://scenes/imports/environment/Tree09.tscn" id="9_ot4bg"]
+[ext_resource type="PackedScene" uid="uid://bgw1mx4ut50uc" path="res://scenes/imports/environment/Tree10.tscn" id="10_6aytf"]
+[ext_resource type="PackedScene" uid="uid://2d24msyrxvba" path="res://scenes/imports/environment/Bush01.tscn" id="11_jcf5v"]
+[ext_resource type="PackedScene" uid="uid://brkyflgnjasvd" path="res://scenes/imports/environment/Grass01.tscn" id="11_vclpm"]
+[ext_resource type="PackedScene" uid="uid://dt1v8f3p62nxn" path="res://scenes/imports/environment/Bush02.tscn" id="12_5wgny"]
+[ext_resource type="PackedScene" uid="uid://osrnfc4pkc5r" path="res://scenes/imports/environment/Grass02.tscn" id="14_d2130"]
+[ext_resource type="PackedScene" uid="uid://uh7iimw04iyk" path="res://scenes/imports/environment/Grass03.tscn" id="15_8uf8a"]
+[ext_resource type="PackedScene" uid="uid://bvrh2fmqw1rwl" path="res://scenes/imports/environment/Grass04.tscn" id="16_uey42"]
+[ext_resource type="PackedScene" uid="uid://vsf4ch052vdr" path="res://scenes/imports/environment/Grass05.tscn" id="17_2gg1m"]
+[ext_resource type="PackedScene" uid="uid://tqr4ablw8ft5" path="res://scenes/imports/environment/Grass06.tscn" id="18_fu3oc"]
+[ext_resource type="PackedScene" uid="uid://dojxum8e1rcnb" path="res://scenes/imports/environment/Grass07.tscn" id="19_32yoc"]
+[ext_resource type="PackedScene" uid="uid://bg3rr32787wi8" path="res://scenes/imports/environment/Grass08.tscn" id="20_kl2sd"]
+[ext_resource type="PackedScene" uid="uid://ce385hvcejxva" path="res://scenes/imports/environment/Grass09.tscn" id="21_26124"]
+[ext_resource type="PackedScene" uid="uid://b1uwudfm0vnol" path="res://scenes/prefabs/player.tscn" id="21_y5ry1"]
+[ext_resource type="PackedScene" uid="uid://bq87e5wf0o3k0" path="res://scenes/prefabs/camera/third_person_camera.tscn" id="22_r2che"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_eoq1u"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_8wjsc"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.533113, 0.846044, 0, -0.846044, 0.533113, 0, 0, 0)
+shadow_enabled = true
+
+[node name="TerrainChunkManager" type="Node3D" parent="." node_paths=PackedStringArray("observer")]
+script = ExtResource("2_dflq0")
+chunk_size = Vector3i(32, 32, 32)
+observed_radius = 5.0
+observer = NodePath("../ThirdPersonCamera")
+chunk_scene = ExtResource("3_ebmup")
+cell_size = 6
+trees = Array[PackedScene]([ExtResource("5_3mrif"), ExtResource("5_3jp6s"), ExtResource("6_dkp30"), ExtResource("7_titch"), ExtResource("8_p6v2n"), ExtResource("9_ot4bg"), ExtResource("10_6aytf")])
+bushes = Array[PackedScene]([ExtResource("11_jcf5v"), ExtResource("12_5wgny")])
+grass = Array[PackedScene]([ExtResource("11_vclpm"), ExtResource("14_d2130"), ExtResource("15_8uf8a"), ExtResource("16_uey42"), ExtResource("17_2gg1m"), ExtResource("18_fu3oc"), ExtResource("19_32yoc"), ExtResource("20_kl2sd"), ExtResource("21_26124")])
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0065, 30, 21.3818)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D"]
+shape = SubResource("SphereShape3D_eoq1u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D"]
+mesh = SubResource("SphereMesh_8wjsc")
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("21_y5ry1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.22484, 0, 7.85219)
+camera = NodePath("")
+
+[node name="ThirdPersonCamera" parent="." instance=ExtResource("22_r2che")]

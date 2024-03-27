@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt1v8f3p62nxn"]
+
+[ext_resource type="PackedScene" uid="uid://2d24msyrxvba" path="res://scenes/imports/environment/Bush01.tscn" id="1_aopk3"]
+
+
+[node name="Bush02" instance=ExtResource("1_aopk3")]
+
+[node name="Bush01" parent="." index="0"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
