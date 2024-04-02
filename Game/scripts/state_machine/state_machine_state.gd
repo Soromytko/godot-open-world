@@ -1,8 +1,10 @@
 class_name StateMachineState extends Node
 
+
 signal transitioned
 
-func _switch_state(state_name):
+
+func _switch_state(state_name : String):
 	emit_signal("transitioned", state_name)
 
 
@@ -13,7 +15,7 @@ func _on_enter():
 func _on_update(delta):
 	pass
 
-	
+
 func _on_physics_update(delta):
 	pass
 
