@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdn3m55du7ra6"]
+
+[ext_resource type="Script" path="res://scripts/inventory/pickup_item.gd" id="1_gsk5a"]
+[ext_resource type="Resource" uid="uid://qatthnbkknwo" path="res://resources/items/stone_item.tres" id="2_dh6wy"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_lc8fi"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8lvks"]
+albedo_color = Color(0.345098, 0.345098, 0.345098, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cxshr"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Stone" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_gsk5a")
+item = ExtResource("2_dh6wy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_lc8fi")
+surface_material_override/0 = SubResource("StandardMaterial3D_8lvks")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_cxshr")

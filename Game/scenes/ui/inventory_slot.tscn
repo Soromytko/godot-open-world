@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cduwujh8xcrhf"]
+
+[ext_resource type="PackedScene" uid="uid://b6u224k8brcvc" path="res://addons/slot_based_container/scenes/slot.tscn" id="1_b67gq"]
+[ext_resource type="Script" path="res://scripts/inventory/slot_ui.gd" id="2_atbjj"]
+
+[node name="TextureRect" instance=ExtResource("1_b67gq")]
+script = ExtResource("2_atbjj")

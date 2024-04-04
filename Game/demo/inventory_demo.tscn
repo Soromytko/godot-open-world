@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1byevyu2kmna"]
+
+[ext_resource type="Script" path="res://addons/slot_based_container/scripts/slot_based_container_ui.gd" id="2_d1cv1"]
+[ext_resource type="Script" path="res://addons/slot_based_container/scripts/slot_based_container.gd" id="3_lc31k"]
+
+[node name="InventoryDemo" type="Node3D"]
+
+[node name="SlotBasedContainer" type="Node" parent="."]
+script = ExtResource("3_lc31k")
+
+[node name="SlotBasedContainerUI" type="Control" parent="." node_paths=PackedStringArray("slot_based_container")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -34.0
+offset_right = 170.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_d1cv1")
+slot_based_container = NodePath("../SlotBasedContainer")

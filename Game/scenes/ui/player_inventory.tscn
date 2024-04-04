@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://bewb86cd41cwv"]
+
+[ext_resource type="Script" path="res://scripts/inventory/inventory.gd" id="1_l12td"]
+[ext_resource type="Script" path="res://scripts/inventory/picker.gd" id="2_vwry5"]
+[ext_resource type="Script" path="res://addons/slot_based_container/scripts/slot_based_container.gd" id="3_cs3pc"]
+[ext_resource type="Script" path="res://addons/slot_based_container/scripts/slot_based_container_ui.gd" id="4_rtwtv"]
+[ext_resource type="PackedScene" uid="uid://cduwujh8xcrhf" path="res://scenes/ui/inventory_slot.tscn" id="5_ggwqj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2ejd5"]
+
+[node name="Inventory" type="Node3D"]
+script = ExtResource("1_l12td")
+
+[node name="Picker" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2_vwry5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Picker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_2ejd5")
+
+[node name="SlotBasedContainer" type="Node" parent="."]
+script = ExtResource("3_cs3pc")
+
+[node name="SlotBasedContainerUI" type="Control" parent="." node_paths=PackedStringArray("slot_based_container")]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -68.0
+offset_right = 170.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("4_rtwtv")
+slot_based_container = NodePath("../SlotBasedContainer")
+slot_ui_scene = ExtResource("5_ggwqj")

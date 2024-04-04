@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://05cdn7tr4171"]
+
+[ext_resource type="Texture2D" uid="uid://chcwnklshtjfg" path="res://resources/textures/icons/items/wood.png" id="1_g4nqw"]
+[ext_resource type="Script" path="res://scripts/inventory/inventory_item.gd" id="2_p4rh4"]
+
+[resource]
+script = ExtResource("2_p4rh4")
+type = 0
+is_stackable = true
+icon = ExtResource("1_g4nqw")
