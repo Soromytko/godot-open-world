@@ -22,9 +22,10 @@ func _input(event):
 		rotation_degrees.y = _rotation.x
 	if event is InputEventKey:
 		match event.keycode:
-			KEY_ESCAPE: get_tree().quit()
-			
-	
+			KEY_ESCAPE:
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	
 

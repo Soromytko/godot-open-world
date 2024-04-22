@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq87e5wf0o3k0"]
+[gd_scene load_steps=4 format=3 uid="uid://bq87e5wf0o3k0"]
 
 [ext_resource type="Script" path="res://scripts/camera/third_person_camera.gd" id="1_ri10d"]
+[ext_resource type="Script" path="res://scripts/camera/game_closer_debug.gd" id="2_lc230"]
 
 [sub_resource type="Environment" id="Environment_nm83q"]
 background_color = Color(0, 1, 1, 1)
@@ -21,3 +22,6 @@ far = 500.0
 [node name="RayCast3D" type="RayCast3D" parent="Pivot/Camera3D"]
 transform = Transform3D(1, -2.75286e-21, 0, -2.75286e-21, 1, 0, 0, 0, 1, 0, 3, 0)
 target_position = Vector3(0, 0, -50)
+
+[node name="GameCloserDebug" type="Node" parent="."]
+script = ExtResource("2_lc230")

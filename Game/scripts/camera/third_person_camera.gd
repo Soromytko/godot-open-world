@@ -26,8 +26,7 @@ func _input(event):
 		_instant_mouse.y = clamp(_instant_mouse.y, _minimum_angle, _maximum_angle)
 	if event is InputEventKey:
 		if event.keycode == KEY_ESCAPE:
-			get_tree().quit()
-#			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func _physics_process(delta):
