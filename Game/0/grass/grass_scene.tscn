@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq0hobmyp5yha"]
+
+[ext_resource type="Script" path="res://addons/dreadpon.spatial_gardener/arborist/mmi_octree/gardener_member.gd" id="1_y6shd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lkki3"]
+
+[node name="GrassScene" type="StaticBody3D"]
+script = ExtResource("1_y6shd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_lkki3")

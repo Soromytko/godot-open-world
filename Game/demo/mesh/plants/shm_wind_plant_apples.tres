@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c1mtpoori0l5a"]
+
+[ext_resource type="Shader" path="res://demo/mesh/plants/sh_single_wind_opaque.gdshader" id="1"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1")

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/bald_terrain/scripts/terrain_collision_shape.gd" id="2_db7qs"]
 [ext_resource type="Script" path="res://addons/bald_terrain/scripts/terrain_deformer.gd" id="2_xgax5"]
 [ext_resource type="PackedScene" uid="uid://b1uwudfm0vnol" path="res://scenes/prefabs/player.tscn" id="3_56hwi"]
-[ext_resource type="Image" uid="uid://drv7hhnxrq0gy" path="res://terrain_resources/heightmap_image0.res" id="3_maijr"]
+[ext_resource type="Image" uid="uid://drv7hhnxrq0gy" path="res://resources/terrain/heightmap_image0.res" id="3_maijr"]
 [ext_resource type="PackedScene" uid="uid://bq87e5wf0o3k0" path="res://scenes/prefabs/camera/third_person_camera.tscn" id="4_31m6b"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_lg0oi"]

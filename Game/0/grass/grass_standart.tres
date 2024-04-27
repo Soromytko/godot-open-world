@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bcfx8fw27ewra"]
+
+[ext_resource type="Texture2D" uid="uid://c1fua4qgowbc2" path="res://demo/mesh/plants/50оттенковБелого.png" id="1_3o7f8"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.686275, 0.768627, 0.345098, 1)
+albedo_texture = ExtResource("1_3o7f8")
