@@ -444,6 +444,11 @@ func request_prop_action(prop_action:PropAction):
 
 
 
+func set_mesh_lod_variants(value : Array):
+	var property_name := "mesh/mesh_LOD_variants"
+	_set(property_name, value)
+
+
 #-------------------------------------------------------------------------------
 # Property export
 #-------------------------------------------------------------------------------

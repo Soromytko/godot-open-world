@@ -96,6 +96,7 @@ func connect_node(octree_node:MMIOctreeNode):
 	FunLib.ensure_signal(octree_node.placeforms_rejected, grow_to_members)
 	FunLib.ensure_signal(octree_node.collapse_self_possible, collapse_root)
 	FunLib.ensure_signal(octree_node.req_debug_redraw, request_debug_redraw)
+	FunLib.ensure_signal(octree_node.member_placeform_destroyed, _on_member_placeform_destoryed)
 
 
 func disconnect_node(octree_node:MMIOctreeNode):
@@ -103,6 +104,7 @@ func disconnect_node(octree_node:MMIOctreeNode):
 	octree_node.placeforms_rejected.disconnect(grow_to_members)
 	octree_node.collapse_self_possible.disconnect(collapse_root)
 	octree_node.req_debug_redraw.disconnect(request_debug_redraw)
+	octree_node.member_placeform_destroyed.disconnect(_on_member_placeform_destoryed)
 
 
 func destroy():
@@ -363,3 +365,9 @@ func request_debug_redraw():
 # Manually trigger a Logger message when an OctreeNode doesn't know an important action happened
 func debug_manual_root_logger(message:String):
 	root_octree_node.print_address(message)
+
+
+func _on_member_placeform_destoryed(placeform : Array):
+	queue_placeforms_remove(placeform)
+	process_queues()
+	#remove_placeforms(placeform)

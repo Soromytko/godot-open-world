@@ -321,6 +321,7 @@ func _set_state(state: Dictionary):
 
 
 func on_greenhouse_prop_action_executed(prop_action, final_val):
+	print("FFFFFF")
 	_side_panel.on_greenhouse_prop_action_executed(folding_states, active_gardener.greenhouse, prop_action, final_val)
 
 

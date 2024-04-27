@@ -31,6 +31,8 @@ const SH_Single = preload("stroke_handler/sh_single.gd")
 const SH_Reapply = preload("stroke_handler/sh_reapply.gd")
 const SH_Manual = preload("stroke_handler/sh_manual.gd")
 
+const class_greenhouse_plant = preload("../greenhouse/greenhouse_plant.gd")
+
 var MMI_container:Node3D = null
 var octree_managers:Array
 
@@ -157,9 +159,9 @@ func verify_all_plants(plant_states_to_verify:Array):
 	for plant_index in range(0, plant_states_to_verify.size()):
 		if octree_managers.size() - 1 >= plant_index:
 			octree_managers[plant_index].restore_after_load(MMI_container)
-			connect_octree_manager(octree_managers[plant_index])
+			connect_octree_manager(octree_managers[plant_index].plant)
 		else:
-			add_plant_octree_manager(plant_states_to_verify[plant_index], plant_index)
+			add_plant_octree_manager(plant_states_to_verify[plant_index].plant, plant_index)
 
 
 
@@ -172,7 +174,7 @@ func verify_all_plants(plant_states_to_verify:Array):
 # Instigate the OctreeManager adding process in response to an external signal
 func on_plant_added(plant_state, plant_index:int):
 	debug_print_lifecycle("plant: %s added at plant_index %d" % [str(plant_state), plant_index])
-	add_plant_octree_manager(plant_state, plant_index)
+	add_plant_octree_manager(plant_state.plant, plant_index)
 	request_debug_redraw_from_index(plant_index)
 	call_deferred("emit_member_count", plant_index)
 
@@ -224,17 +226,17 @@ func set_LODs_to_active_index(plant_index:int):
 
 
 # Initialize an OctreeManager for a given plant
-func add_plant_octree_manager(plant_state, plant_index:int):
+func add_plant_octree_manager(plant : class_greenhouse_plant, plant_index:int):
 	var octree_manager:MMIOctreeManager = MMIOctreeManager.new()
 	octree_manager.init_octree(
-		plant_state.plant.mesh_LOD_max_capacity, plant_state.plant.mesh_LOD_min_size,
-		Vector3.ZERO, MMI_container, plant_state.plant.mesh_LOD_min_size)
-	octree_manager.LOD_max_distance = plant_state.plant.mesh_LOD_max_distance
-	octree_manager.LOD_kill_distance = plant_state.plant.mesh_LOD_kill_distance
+		plant.mesh_LOD_max_capacity, plant.mesh_LOD_min_size,
+		Vector3.ZERO, MMI_container, plant.mesh_LOD_min_size)
+	octree_manager.LOD_max_distance = plant.mesh_LOD_max_distance
+	octree_manager.LOD_kill_distance = plant.mesh_LOD_kill_distance
 	octree_managers.insert(plant_index, octree_manager)
 	
-	for mesh_index in range (0, plant_state.plant.mesh_LOD_variants.size()):
-		var LOD_variant = plant_state.plant.mesh_LOD_variants[mesh_index]
+	for mesh_index in range (0, plant.mesh_LOD_variants.size()):
+		var LOD_variant = plant.mesh_LOD_variants[mesh_index]
 		octree_manager.insert_LOD_variant(LOD_variant, mesh_index)
 	connect_octree_manager(octree_manager)
 
@@ -245,6 +247,11 @@ func remove_plant_octree_manager(plant_state, plant_index:int):
 	disconnect_octree_manager(octree_manager)
 	octree_manager.prepare_for_removal()
 	octree_managers.remove_at(plant_index)
+
+
+func reset_octree_managers():
+	for i in octree_managers.size():
+		remove_plant_octree_manager(null, 0)
 
 
 # A request to reconfigure an octree
@@ -333,12 +340,17 @@ func on_stroke_updated(brush_data:Dictionary):
 	
 #	mutex_placement.lock()
 	var changes = active_stroke_handler.get_stroke_update_changes(brush_data, global_transform)
+	#print(brush_data)
 	apply_stroke_update_changes(changes)
 #	mutex_placement.unlock()
 	active_painting_changes.append_changes(changes)
 	
 	var msec_end = FunLib.get_msec()
 	debug_print_lifecycle("Total stroke %s update took: %s" % [active_stroke_handler.get_meta("class"), FunLib.msec_to_time(msec_end - msec_start)])
+
+
+func draw(brush_data : Dictionary):
+	on_stroke_updated(brush_data)
 
 
 # Use collected PaintingChanges to add UndoRedo actions
@@ -408,6 +420,14 @@ func apply_stroke_update_changes(changes:PaintingChanges):
 	
 	var msec_end = FunLib.get_msec()
 	debug_print_lifecycle("	Applying stroke changes took: %s" % [FunLib.msec_to_time(msec_end - msec_start)])
+
+
+func add_placeforms(placeforms : Array, octree_managers_index : int):
+	var octree_manager : MMIOctreeManager = octree_managers[octree_managers_index]
+	for placeform in placeforms:
+		print(placeform)
+		octree_manager.queue_placeforms_add(placeform)
+	octree_manager.process_queues()
 
 
 func emit_member_count(octree_index:int):

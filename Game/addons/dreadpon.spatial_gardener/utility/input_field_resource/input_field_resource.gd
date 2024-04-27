@@ -337,7 +337,6 @@ func _perform_prop_action(prop_action:PropAction):
 	
 	prop_action_executed.emit(prop_action, get(prop_action.prop))
 
-
 # Reverses the prop action (used for undo actions)
 func _get_opposite_prop_action(prop_action:PropAction) -> PropAction:
 	var prop_action_class = prop_action.get_meta("class")

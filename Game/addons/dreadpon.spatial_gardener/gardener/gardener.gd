@@ -479,6 +479,7 @@ func set_initialized_for_edit(val):
 
 # When Greenhouse properties are changed
 func on_greenhouse_prop_action_executed(prop_action:PropAction, final_val):
+# final_val is greenhouse_plant_state
 	if is_instance_of(prop_action, PA_ArrayInsert):
 		arborist.on_plant_added(final_val[prop_action.index], prop_action.index)
 		reinit_debug_draw_brush_active()

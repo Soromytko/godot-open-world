@@ -295,7 +295,7 @@ func assign_LOD_variant(max_LOD_index:int, LOD_max_distance:float, LOD_kill_dist
 		LOD_index = clamp(floor(dist_to_node_center_bounds_estimate / LOD_max_distance * max_LOD_index), 0, max_LOD_index)
 	
 	# Skip if already assigned this LOD_index
-	if active_LOD_index == LOD_index: return
+	#if active_LOD_index == LOD_index: return
 	
 	var last_LOD_index = active_LOD_index
 	active_LOD_index = LOD_index
@@ -585,7 +585,7 @@ func spawn_spatial_for_member_idxs(member_idxs:Array, mmi_idxs:Array = []):
 		if i < mmi_idxs.size():
 			mmi_idx = mmi_idxs[i]
 		
-		spawned_spatial = LODVariant.spawned_spatial.instantiate()
+		spawned_spatial = _spawn_spatial(LODVariant, member_idx)
 		spawned_spatial.transform = get_member_transform(member_idx)
 		MMI.add_child(spawned_spatial)
 		spawned_spatial.owner = MMI.owner
@@ -1030,3 +1030,33 @@ func print_address(prefix:String = "", suffix:String = ""):
 		string = string + " " + suffix
 	
 	logger.info(string)
+
+
+const class_gardener_member = preload("./gardener_member.gd")
+
+signal member_placeform_destroyed(placeform : Array)
+
+
+func _spawn_spatial(lod_variant : Greenhouse_LODVariant, member_index : int):
+	if lod_variant == null or lod_variant.spawned_spatial == null:
+		return null
+	var spawned_spatial = lod_variant.spawned_spatial.instantiate()
+	if spawned_spatial is class_gardener_member:
+		var gardener_member : class_gardener_member = spawned_spatial
+		gardener_member.destroyed.connect(_on_member_destroyed)
+	return spawned_spatial
+
+
+func _on_member_destroyed(index : int):
+	var placeform := get_placeform(index)
+	member_placeform_destroyed.emit(placeform)
+	return
+	remove_members([placeform])
+	process_collapse_children()
+	process_collapse_self()
+	MMI_refresh_instance_placements_recursive()
+
+
+func _on_member_placeform_destroyed(placeform : Array):
+	member_placeform_destroyed.emit(placeform)
+
