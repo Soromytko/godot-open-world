@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Plant" load_steps=6 format=3 uid="uid://dycupbm113sg8"]
+
+[ext_resource type="Resource" uid="uid://x8pqibtyp5fi" path="res://demo/spatial_nature/resources/plants/grass/grass_lod_variant_0.tres" id="1_xtg0e"]
+[ext_resource type="Resource" uid="uid://bj8btq6okedq8" path="res://demo/spatial_nature/resources/plants/grass/grass_lod_variant_1.tres" id="2_kx0m8"]
+[ext_resource type="Resource" uid="uid://gjux67j3eilv" path="res://demo/spatial_nature/resources/plants/grass/grass_lod_variant_2.tres" id="3_5cxeb"]
+[ext_resource type="Image" uid="uid://2rlekbdiqcuc" path="res://demo/spatial_nature/resources/textures/forest_noise.png" id="4_cpcml"]
+[ext_resource type="Script" path="res://scripts/procedural_generation/plant.gd" id="5_640hj"]
+
+[resource]
+resource_name = "Grass"
+script = ExtResource("5_640hj")
+noise_map = ExtResource("4_cpcml")
+frequency = 1.0
+frequency_degree = 7
+min_noise_value = 0.1
+min_size = 0.8
+max_size = 1.5
+size = Vector3(512, 512, 512)
+max_depth = 7
+node_capacity = 50
+lod_update_rate = 0.5
+max_lod_distance = 2.0
+is_killable_by_distance = true
+lod_variants = Array[Resource]([ExtResource("1_xtg0e"), ExtResource("2_kx0m8"), ExtResource("3_5cxeb")])

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://gjux67j3eilv"]
+
+[ext_resource type="ArrayMesh" uid="uid://d2htnk2vpmuls" path="res://demo/spatial_nature/resources/models/grass/grass_lod2.res" id="1_yb7wh"]
+[ext_resource type="Script" path="res://addons/spatial_nature/scripts/lod_variant.gd" id="2_mrvdo"]
+
+[resource]
+script = ExtResource("2_mrvdo")
+lod_distance = 8.0
+shadow_casting = 0
+mesh = ExtResource("1_yb7wh")

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://1hcf4geisum4"]
+
+[ext_resource type="ArrayMesh" uid="uid://4xwperwvxe1b" path="res://demo/spatial_nature/resources/models/fir/fir_lod1.res" id="1_nbwer"]
+[ext_resource type="PackedScene" uid="uid://b640sigeaajii" path="res://demo/spatial_nature/resources/plants/fir/fir_collision_shape_lod_0.tscn" id="1_pntel"]
+[ext_resource type="Script" path="res://addons/spatial_nature/scripts/lod_variant.gd" id="2_h2h70"]
+
+[resource]
+script = ExtResource("2_h2h70")
+lod_distance = 4.0
+shadow_casting = 1
+mesh = ExtResource("1_nbwer")
+destroyable_scene = ExtResource("1_pntel")

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Plant" load_steps=6 format=3 uid="uid://dkm5nn31vqc5q"]
+
+[ext_resource type="Script" path="res://scripts/procedural_generation/plant.gd" id="1_c1u4t"]
+[ext_resource type="Resource" uid="uid://bf4ilinam1uf1" path="res://demo/spatial_nature/resources/plants/fir/fir_lod_variant_0.tres" id="1_do27s"]
+[ext_resource type="Resource" uid="uid://1hcf4geisum4" path="res://demo/spatial_nature/resources/plants/fir/fir_lod_variant_1.tres" id="2_jh2op"]
+[ext_resource type="Resource" uid="uid://c7qnsjrb5vv31" path="res://demo/spatial_nature/resources/plants/fir/fir_lod_variant_2.tres" id="3_ktv83"]
+[ext_resource type="Image" uid="uid://2rlekbdiqcuc" path="res://demo/spatial_nature/resources/textures/forest_noise.png" id="4_lubbm"]
+
+[resource]
+resource_name = "Fir"
+script = ExtResource("1_c1u4t")
+noise_map = ExtResource("4_lubbm")
+frequency = 1.0
+frequency_degree = 1
+min_noise_value = 0.1
+min_size = 0.8
+max_size = 1.8
+size = Vector3(512, 512, 512)
+max_depth = 4
+node_capacity = 50
+lod_update_rate = 0.5
+max_lod_distance = 2.0
+is_killable_by_distance = true
+lod_variants = Array[Resource]([ExtResource("1_do27s"), ExtResource("2_jh2op"), ExtResource("3_ktv83")])

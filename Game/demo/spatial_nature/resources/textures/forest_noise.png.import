@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://2rlekbdiqcuc"
+path="res://.godot/imported/forest_noise.png-91e6e49dc8a5b3aad47d47e55ad11374.image"
+
+[deps]
+
+source_file="res://demo/spatial_nature/resources/textures/forest_noise.png"
+dest_files=["res://.godot/imported/forest_noise.png-91e6e49dc8a5b3aad47d47e55ad11374.image"]
+
+[params]
+

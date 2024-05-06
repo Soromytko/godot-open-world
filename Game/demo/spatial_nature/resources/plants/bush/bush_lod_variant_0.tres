@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bamakvyoatsnf"]
+
+[ext_resource type="ArrayMesh" uid="uid://ci5tf2bdwgiks" path="res://demo/spatial_nature/resources/models/bush/bush_lod0.res" id="1_ju4lv"]
+[ext_resource type="Script" path="res://addons/spatial_nature/scripts/lod_variant.gd" id="2_5pusq"]
+
+[resource]
+script = ExtResource("2_5pusq")
+lod_distance = 2.0
+mesh = ExtResource("1_ju4lv")
