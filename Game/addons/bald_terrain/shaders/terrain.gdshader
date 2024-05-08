@@ -21,6 +21,7 @@ vec2 get_world_vertex_uv(vec3 vertex) {
 	// Convert vertex to uv
 	vec2 uv = vertex.xz / (heightmap_size * pixels_per_meter);
 	uv += uv_offset;
+	// Clamp the uv to correctly calculate the normals at the edges
 	uv.x = clamp(uv.x, 0.0, 1.0 - pixel_size.x);
 	uv.y = clamp(uv.y, 0.0, 1.0 - pixel_size.y);
 	
