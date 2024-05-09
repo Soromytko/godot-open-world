@@ -20,6 +20,14 @@ var heightmap_image : Image:
 			_tree_config.heightmap_texture = _heightmap_texture
 			_create_terrain()
 
+var heightmap_uv_offset : Vector2:
+	get:
+		return heightmap_uv_offset
+	set(value):
+		heightmap_uv_offset = value
+		if is_node_ready():
+			_tree_config.heightmap_uv_offset = heightmap_uv_offset
+
 var main_texture : Texture:
 	get:
 		return main_texture

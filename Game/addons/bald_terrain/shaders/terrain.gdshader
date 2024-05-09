@@ -5,7 +5,7 @@ uniform sampler2D heightmap;
 uniform float height = 1.0;
 uniform float pixels_per_meter = 1.0;
 uniform vec3 vertex_step = vec3(1.0);
-uniform vec2 uv_offset = vec2(0.5);
+uniform vec2 heightmap_uv_offset = vec2(0.5);
 uniform vec2 main_texture_tiling = vec2(1.0);
 
 vec3 get_world_vertex(vec3 vertex, mat4 model_matrix) {
@@ -20,7 +20,7 @@ vec2 get_world_vertex_uv(vec3 vertex) {
 	vertex.xz += -vertex.xz * pixel_size;
 	// Convert vertex to uv
 	vec2 uv = vertex.xz / (heightmap_size * pixels_per_meter);
-	uv += uv_offset;
+	uv += heightmap_uv_offset;
 	// Clamp the uv to correctly calculate the normals at the edges
 	uv.x = clamp(uv.x, 0.0, 1.0 - pixel_size.x);
 	uv.y = clamp(uv.y, 0.0, 1.0 - pixel_size.y);
@@ -61,7 +61,7 @@ void vertex() {
 	vec3 world_vertex = get_world_vertex_with_height(VERTEX, MODEL_MATRIX);
 	NORMAL = get_vertex_normal(world_vertex, MODEL_MATRIX);
 	VERTEX.y = world_vertex.y;
-	UV = world_vertex.xz / vec2(textureSize(heightmap, 0)) + uv_offset;
+	UV = world_vertex.xz / vec2(textureSize(heightmap, 0)) + heightmap_uv_offset;
 }
 
 void fragment() {

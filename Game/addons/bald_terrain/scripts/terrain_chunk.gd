@@ -33,7 +33,7 @@ class TreeConfig:
 	var heightmap_texture : ImageTexture
 	var main_texture : Texture
 	var shader : Shader
-
+	var heightmap_uv_offset : Vector2
 
 
 var node_config : NodeConfig:
@@ -193,7 +193,7 @@ func _create_material():
 	#material.set_shader_parameter("height", 1.0)
 	#material.set_shader_parameter("pixels_per_meter", 1.0)
 	#material.set_shader_parameter("vertex_step", Vector3.ONE * 1)
-	#material.set_shader_parameter("uv_offset", Vector3.ONE * 0.5)
+	material.set_shader_parameter("heightmap_uv_offset", tree_config.heightmap_uv_offset)
 	var tiling : Vector3 = tree_config.root.node_config.size / 10
 	material.set_shader_parameter("main_texture_tiling", Vector2(tiling.x, tiling.z))
 	return material

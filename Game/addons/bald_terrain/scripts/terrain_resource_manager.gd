@@ -16,6 +16,7 @@ var data : class_terrain_data:
 		data = value
 
 const file_names = {
+	terrain_data = "terrain_data.tres",
 	heightmap_image = "heightmap_image.res",
 	main_texture = "main_texture.jpg",
 }
@@ -25,29 +26,27 @@ func is_path_valid() -> bool:
 	return path != null && DirAccess.open(path) != null
 
 
-func load_terrain_data() -> bool:
+func try_load_terrain_data() -> bool:
 	if not is_path_valid():
 		return false
-	if not ResourceLoader.exists(path + "/" + file_names.heightmap_image):
+	if not ResourceLoader.exists(path + "/" + file_names.terrain_data):
 		return false
-	var terrain_data = class_terrain_data.new()
-	terrain_data.heightmap_image = load(path + "/" + file_names.heightmap_image)
-	terrain_data.main_texture = load(path + "/" + file_names.main_texture)
-	data = terrain_data
+	data = load(_get_path_to_file(file_names.terrain_data))
+	return data != null
+
+
+func try_save_terrain_data() -> bool:
+	if not is_path_valid():
+		return false
+	if data == null:
+		return false
+	ResourceSaver.save(data, _get_path_to_file(file_names.terrain_data))
+	ResourceSaver.save(data.heightmap_image, _get_path_to_file(file_names.heightmap_image))
 	return true
 
 
-func save_terrain_data() -> bool:
-	if not is_path_valid():
-		return false
-	if data == null || not data.validate_data():
-		return false
-	ResourceSaver.save(data.heightmap_image, path + "/" + file_names.heightmap_image)
-	return true
-
-
-func create_terrain_data(image_size : Vector2i) -> bool:
-	var terrain_data = class_terrain_data.new()
+func try_create_terrain_data(image_size : Vector2i) -> bool:
+	var terrain_data := class_terrain_data.new()
 	terrain_data.heightmap_image = _create_heightmap(image_size)
 	terrain_data.main_texture = _create_main_texture(image_size)
 	data = terrain_data
@@ -68,6 +67,10 @@ func resize_heightmap(size : Vector2i) -> bool:
 			color.r *= size_ratio
 			heightmap.set_pixel(i, j, color)
 	return true
+
+
+func _get_path_to_file(file_name : String) -> String:
+	return path + "/" + file_name
 
 
 func _create_heightmap(size : Vector2i) -> Image:

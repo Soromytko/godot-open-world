@@ -106,6 +106,7 @@ func _init_terrain_renderer():
 		add_child(_terrain_renderer)
 	_terrain_renderer.heightmap_image = _terrain_resource_manager.data.heightmap_image
 	_terrain_renderer.main_texture = _terrain_resource_manager.data.main_texture
+	_terrain_renderer.heightmap_uv_offset = _terrain_resource_manager.data.uv_offset
 	_terrain_renderer.observer = _get_observer()
 
 
@@ -124,8 +125,8 @@ func _init_collision_shape():
 
 
 func _load_terrain_data():
-	if not _terrain_resource_manager.load_terrain_data():
-		_terrain_resource_manager.create_terrain_data(Vector2i.ONE * _resolution)
+	if not _terrain_resource_manager.try_load_terrain_data():
+		_terrain_resource_manager.try_create_terrain_data(Vector2i.ONE * _resolution)
 	else:
 		var heightmap_size : Vector2i = _terrain_resource_manager.data.heightmap_image.get_size()
 		var max_value : float = heightmap_size[heightmap_size.max_axis_index()]
@@ -133,7 +134,7 @@ func _load_terrain_data():
 
 
 func _save_terrain_data():
-	_terrain_resource_manager.save_terrain_data()
+	_terrain_resource_manager.try_save_terrain_data()
 
 
 func _get_observer() -> Node3D:
