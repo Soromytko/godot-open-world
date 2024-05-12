@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bbuuuudodyajr"]
+
+[ext_resource type="Script" path="res://addons/bald_terrain/scripts/terrain_data.gd" id="1_a8akj"]
+[ext_resource type="Image" uid="uid://vprb7d2svr4x" path="res://resources/terrain/heightmap_image.res" id="1_y1g0g"]
+[ext_resource type="Texture2D" uid="uid://cp82fmf3eoac1" path="res://resources/terrain/main_texture.jpg" id="2_i5jg6"]
+
+[resource]
+script = ExtResource("1_a8akj")
+heightmap_image = ExtResource("1_y1g0g")
+main_texture = ExtResource("2_i5jg6")
+uv_offset = Vector2(0.5, 0.5)

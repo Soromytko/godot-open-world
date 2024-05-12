@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://duevnodepou4h"]
+
+[ext_resource type="Script" path="res://addons/bald_terrain/scripts/terrain.gd" id="1_hykmw"]
+[ext_resource type="Script" path="res://scripts/procedural_generation/arborist.gd" id="4_gwslp"]
+[ext_resource type="Image" uid="uid://vprb7d2svr4x" path="res://resources/terrain/heightmap_image.res" id="5_tk2y5"]
+[ext_resource type="Resource" uid="uid://cx2pyrglaui4a" path="res://demo/spatial_nature/resources/plants/bush/bush_plant.tres" id="6_mt8sd"]
+[ext_resource type="Resource" uid="uid://dycupbm113sg8" path="res://demo/spatial_nature/resources/plants/grass/grass_plant.tres" id="6_u0llc"]
+[ext_resource type="PackedScene" uid="uid://xkaia20jo0vb" path="res://scenes/prefabs/third_person_player_and_camera.tscn" id="7_5v4pb"]
+[ext_resource type="Resource" uid="uid://dkm5nn31vqc5q" path="res://demo/spatial_nature/resources/plants/fir/fir_plant.tres" id="7_bp3ov"]
+
+[sub_resource type="GDScript" id="GDScript_wmyqv"]
+resource_name = "fps_control"
+script/source = "extends Label
+
+
+func _process(delta):
+	text = str(Engine.get_frames_per_second())
+"
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.717069, -0.426601, 0.551202, -0.15832, 0.670457, 0.72486, -0.678784, -0.607041, 0.413224, 0, 30.9291, 0)
+shadow_enabled = true
+
+[node name="Terrain (BaldTerrain plugin)" type="Node3D" parent="."]
+script = ExtResource("1_hykmw")
+resolution = 9
+resource_directory = "res://resources/terrain"
+
+[node name="Arborist" type="Node3D" parent="."]
+script = ExtResource("4_gwslp")
+size = Vector3(512, 512, 512)
+heightmap = ExtResource("5_tk2y5")
+plants = Array[Resource("res://scripts/procedural_generation/plant.gd")]([ExtResource("7_bp3ov"), ExtResource("6_mt8sd"), ExtResource("6_u0llc")])
+
+[node name="ThirdPersonPlayerAndCamera" parent="." instance=ExtResource("7_5v4pb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86956, 17.9605, -5.80699)
+
+[node name="Control" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("GDScript_wmyqv")

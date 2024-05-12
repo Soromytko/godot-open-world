@@ -1,6 +1,5 @@
 class_name Plant extends "res://addons/spatial_nature/scripts/plant.gd"
 
-@export var name : String
 @export_group("Generation")
 @export var noise_map : Image
 @export_range(0, 1) var frequency : float = 0.8

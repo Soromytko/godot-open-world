@@ -8,7 +8,7 @@ const class_placeform = preload("res://addons/spatial_nature/scripts/placeform.g
 @export var heightmap : Image
 @export var plants : Array[Plant]
 @export_group("Debug")
-@export var refresh : bool:
+@export var clear : bool:
 	set(value):
 		if is_node_ready():
 			_clear()
@@ -18,6 +18,17 @@ const class_placeform = preload("res://addons/spatial_nature/scripts/placeform.g
 			_clear()
 			_generate_with_noise()
 			_update_all_trees_lods()
+@export var insert_random : bool:
+	set(value):
+		if is_node_ready():
+			var plant_transform := Transform3D()
+			var rng := RandomNumberGenerator.new()
+			plant_transform.origin = Vector3(
+				rng.randf_range(-10, 10),
+				rng.randf_range(-10, 10),
+				rng.randf_range(-10, 10)
+			)
+			_octrees[0].insert(plant_transform)
 
 var _octrees : Array[class_octree]
 
@@ -37,8 +48,7 @@ func _init_octrees():
 		var octree := class_octree.new()
 		add_child(octree)
 		#octree.owner = owner
-		octree.name = "%s_Octree" % plants[i].name
-		plants[i].resource_name
+		octree.name = "%s_Octree" % plants[i].resource_name
 		_octrees[i] = octree
 		octree.plant = plants[i]
 
@@ -72,16 +82,16 @@ func _generate_with_noise():
 					if rng.randf_range(0, 1) > plant.frequency:
 						continue
 					var plant_transform := Transform3D()
+					plant_transform = plant_transform.rotated(Vector3.UP, rng.randf_range(0.0, 2.0 * PI))
 					plant_transform = plant_transform.scaled(Vector3.ONE * rng.randf_range(plant.min_size, plant.max_size))
-					
 					plant_transform.origin = Vector3(
 						i,
 						heightmap.get_pixel(i, j).r,
 						j
 					) + _get_random_deviation_vector(rng, 4.0)
 					plant_transform.origin -= Vector3(noise_map.get_width(), 0, noise_map.get_height()) / 2
-					plant_transform.origin = plant_transform.origin /\
-						Vector3(noise_map.get_width(), 1, noise_map.get_height()) *\
+					plant_transform.origin = plant_transform.origin / \
+						Vector3(noise_map.get_width(), 1, noise_map.get_height()) * \
 						size
 					plant_transform.origin = _get_point_on_heightmap(plant_transform.origin)
 					octree.insert(plant_transform)
