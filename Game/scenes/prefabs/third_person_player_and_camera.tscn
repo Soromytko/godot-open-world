@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://xkaia20jo0vb"]
+
+[ext_resource type="PackedScene" uid="uid://b1uwudfm0vnol" path="res://scenes/prefabs/player.tscn" id="1_bf2ch"]
+[ext_resource type="PackedScene" uid="uid://bq87e5wf0o3k0" path="res://scenes/prefabs/camera/third_person_camera.tscn" id="2_6rlev"]
+
+[node name="ThirdPersonPlayerAndCamera" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_bf2ch")]
+
+[node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_6rlev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69101, 2.07127)
+target = NodePath("../Player")
+sharpness = 5.0
+sensitivity = 0.2
