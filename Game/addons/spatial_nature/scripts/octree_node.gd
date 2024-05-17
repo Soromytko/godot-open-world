@@ -15,13 +15,18 @@ const class_destroyable = preload("./destroyable.gd")
 		if value != null:
 			assert(value is class_plant)
 		_plant = value
-		_construct_lod_bounds()
 @export var depth : int:
 	get:
 		return depth
 @export var bounds : AABB:
 	get:
 		return bounds
+@export var size : float:
+	get:
+		return size
+	set(value):
+		size = value
+		bounds = _create_centered_bounds(size)
 var placeforms : Array[class_placeform]:
 	get:
 		return placeforms 
@@ -34,48 +39,28 @@ var octants : Array[class_self]:
 var _plant : class_plant:
 	get:
 		return _plant
-#var _multi_mesh_instance_owner : Node
-var _lod_bounds : Array[AABB]
+var _current_lod_index : int
 var _multi_mesh_instance : MultiMeshInstance3D
 var _destroyable_scene : PackedScene
 var _debug_mesh_instance : MeshInstance3D
 
 
-#func _ready():
-	#if _init_multi_mesh_instance():
-		#_init_placeforms_by_multi_mesh_instance()
-	#_init_octants()
+func update_lod(observer_position : Vector3) -> bool:
+	var distance_to_observer := global_position.distance_to(observer_position)
+	var lod_index := _get_lod_index_by_distance(distance_to_observer)
+	if lod_index == _current_lod_index && lod_index != 0:
+		return false
+	_current_lod_index = lod_index
+	_set_current_lod(_current_lod_index)
+	return true
 
 
-func _enter_tree():
-	#_init_octants()
-	#_create_multi_mesh_instance()
-	#_connect_signals()
-	#_create_debug_box()
-	pass
-
-
-#func _exit_tree():
-	#_disconnect_signals()
-
-
-func update_lod(observer_position : Vector3):
-	#TODO: The nodes of the octree that are not leaves
-	#can contain values only if the values are not points.
-	if _multi_mesh_instance == null || _plant.lod_variants.size() == 0:
-		return
-	var relative_observer_position := _get_relative_position(observer_position)
-	#TODO: Start from the last LOD to reduce the number of cycles
-	for i in _lod_bounds.size():
-		if _lod_bounds[i].has_point(relative_observer_position):
-			#_multi_mesh_instance.visible = true
-			_set_current_lod(i)
-			_multi_mesh_instance.visible = true
-			return
-	#_set_current_lod(_plant.lod_variants.size() - 1)
-	if _plant.is_killable_by_distance:
-		_multi_mesh_instance.visible = false
-		_clear_destroyables()
+func _get_lod_index_by_distance(distance : float) -> int:
+	for i in _plant.lod_variants.size():
+		var lod_variant : class_lod_variant = _plant.lod_variants[i]
+		if distance < lod_variant.lod_distance + size:
+			return i
+	return -1 if _plant.is_killable_by_distance else _plant.lod_variants.size() - 1
 
 
 func get_instance_count() -> int:
@@ -113,29 +98,20 @@ func get_instance_count() -> int:
 			#octants.append(child)
 
 
-func _on_max_lod_distance_changed(value : float):
-	_construct_lod_bounds()
-
-
-func _construct_lod_bounds():
-	if plant == null:
-		return
-	_lod_bounds.resize(_plant.lod_variants.size())
-	var octant_size := bounds.size
-	for i in _lod_bounds.size():
-		#var size := octant_size + octant_size * (i + 1) * _plant.max_lod_distance
-		var lod_variant : class_lod_variant = _plant.lod_variants[i]
-		var size := octant_size * lod_variant.lod_distance
-		_lod_bounds[i] = _create_centered_bounds(size)
-
-
 func _set_current_lod(lod_index : int):
-	var lod_variant : class_lod_variant = _plant.lod_variants[lod_index]
-	if _multi_mesh_instance.multimesh.mesh == lod_variant.mesh:
+	if _multi_mesh_instance == null:
+		return
+	if lod_index >= 0:
+		_multi_mesh_instance.visible = true
+		var lod_variant : class_lod_variant = _plant.lod_variants[lod_index]
+		if _multi_mesh_instance.multimesh.mesh == lod_variant.mesh:
 			return
-	_multi_mesh_instance.multimesh.mesh = lod_variant.mesh
-	_multi_mesh_instance.cast_shadow = lod_variant.shadow_casting
-	_update_destroyables(lod_variant.destroyable_scene)
+		_multi_mesh_instance.multimesh.mesh = lod_variant.mesh
+		_multi_mesh_instance.cast_shadow = lod_variant.shadow_casting
+		_update_destroyables(lod_variant.destroyable_scene)
+	else:
+		_multi_mesh_instance.visible = false
+		_clear_destroyables()
 
 
 func _update_destroyables(destroyable_scene : PackedScene):
@@ -166,7 +142,7 @@ func _clear_destroyables():
 func _on_placeform_destroyed(placeform_index : int):
 	placeforms.remove_at(placeform_index)
 	_update_placeform_indexes(placeform_index)
-	_refresh_multi_mesh_instance()
+	_update_multi_mesh_instance()
 
 
 func _update_placeform_indexes(start_with : int = 0):
@@ -180,8 +156,9 @@ func _set_last_lod():
 	_set_current_lod(_plant.lod_variants.size() - 1)
 
 
-func _create_centered_bounds(size : Vector3) -> AABB:
-	return AABB(-size / 2, size)
+func _create_centered_bounds(size : float) -> AABB:
+	var size_v := Vector3.ONE * size
+	return AABB(-size_v / 2, size_v)
 
 
 func try_insert(placeform : class_placeform) -> bool:
@@ -209,11 +186,11 @@ func _can_subdivide() -> bool:
 func _try_subdivide() -> bool:
 	if not _can_subdivide():
 		return false
-	var octant_bounds := _create_octant_bounds()
+	var octant_size : float = size * 0.5
 	for octant_index in 8:
 		var octant := class_self.new()
 		octant.depth = depth + 1
-		octant.bounds = octant_bounds
+		octant.size = octant_size
 		octant.plant = plant
 		octant.name = "OctreeNode%d" % octant_index
 		add_child(octant)
@@ -229,13 +206,8 @@ func _try_subdivide() -> bool:
 	if placeforms.size() != remaining_placeforms.size():
 		placeforms = remaining_placeforms
 		_update_placeform_indexes()
-		_refresh_multi_mesh_instance()
+		_update_multi_mesh_instance()
 	return true
-
-
-func _create_octant_bounds() -> AABB:
-	var half_bounds_size := bounds.size / 2
-	return AABB(-half_bounds_size / 2, half_bounds_size)
 
 
 func _get_relative_position(node_position : Vector3) -> Vector3:
@@ -269,8 +241,7 @@ func _try_append_placeform(placeform : class_placeform) -> bool:
 		_connect_placeform(placeform)
 		placeform.index = placeforms.size()
 		placeforms.append(placeform)
-		_refresh_multi_mesh_instance()
-		#_add_instance(placeform)
+		_update_multi_mesh_instance()
 		return true
 	return false
 
@@ -294,12 +265,15 @@ func _remove_placeform_by_index(placeform_index : int):
 	placeforms.remove_at(placeform_index)
 
 
-func _refresh_multi_mesh_instance():
-	if placeforms.size() == 0:
-		_destroy_multi_mesh_instance()
-		return
-	if _multi_mesh_instance == null:
+func _update_multi_mesh_instance():
+	if placeforms.size() != 0:
 		_create_multi_mesh_instance()
+		_refresh_multi_mesh_instances()
+	else:
+		_destroy_multi_mesh_instance()
+
+
+func _refresh_multi_mesh_instances():
 	var multi_mesh := _multi_mesh_instance.multimesh
 	# Assigning the instance_count throws an error if the mesh is null
 	if multi_mesh.mesh == null:
@@ -313,15 +287,17 @@ func _refresh_multi_mesh_instance():
 
 
 func _create_multi_mesh_instance():
-	_multi_mesh_instance = MultiMeshInstance3D.new()
-	add_child(_multi_mesh_instance)
-	_multi_mesh_instance.owner = get_tree().get_edited_scene_root()
-	_multi_mesh_instance.name = "MultiMeshInstance3D"
-	var multi_mesh := MultiMesh.new()
-	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
-	_multi_mesh_instance.multimesh = multi_mesh
-	#update_lod(Vector3.ONE)
-	_set_last_lod()
+	if _multi_mesh_instance == null:
+		_multi_mesh_instance = MultiMeshInstance3D.new()
+		add_child(_multi_mesh_instance)
+		_multi_mesh_instance.owner = get_tree().get_edited_scene_root()
+		_multi_mesh_instance.name = "MultiMeshInstance3D"
+		var multi_mesh := MultiMesh.new()
+		multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
+		_multi_mesh_instance.multimesh = multi_mesh
+		_set_last_lod()
+		#Set this to ensure that all octants are updated after creating the multi mesh.
+		_current_lod_index = -2
 
 
 func _destroy_multi_mesh_instance():

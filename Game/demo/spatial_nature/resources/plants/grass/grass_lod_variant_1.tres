@@ -5,6 +5,6 @@
 
 [resource]
 script = ExtResource("2_72vx1")
-lod_distance = 5.0
+lod_distance = 20.0
 shadow_casting = 0
 mesh = ExtResource("1_fuddn")

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_cgji8")
-lod_distance = 2.0
+lod_distance = 10.0
 shadow_casting = 1
 mesh = ExtResource("1_afe66")
 destroyable_scene = ExtResource("1_rxese")

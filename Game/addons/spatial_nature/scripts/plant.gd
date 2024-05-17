@@ -2,7 +2,7 @@
 extends Resource
 
 @export_group("Octree")
-@export var size : Vector3 = Vector3.ONE * 100
+@export var octree_size : float = 512
 @export var max_depth : int = 3
 @export var node_capacity : int = 5
 
