@@ -69,35 +69,6 @@ func get_instance_count() -> int:
 	return _multi_mesh_instance.multimesh.instance_count
 
 
-#func _init_multi_mesh_instance() -> bool:
-	#for child in get_children():
-		#if child is MultiMeshInstance3D:
-			#_multi_mesh_instance = child
-			#return true
-	#return false
-
-
-#func _init_placeforms_by_multi_mesh_instance() -> bool:
-	#if _multi_mesh_instance == null || _multi_mesh_instance.multimesh == null:
-		#return false
-	#var multi_mesh := _multi_mesh_instance.multimesh
-	#placeforms.resize(multi_mesh.instance_count)
-	#for i in placeforms.size():
-		#var placeform := class_placeform.new()
-		#placeform.transform = multi_mesh.get_instance_transform(i)
-		#placeforms[i] = placeform
-	#return true
-
-
-#func _init_octants():
-	#octants.clear()
-	#for child in get_children():
-		#if octants.size() == 8:
-			#break
-		#if child is class_self:
-			#octants.append(child)
-
-
 func _set_current_lod(lod_index : int):
 	if _multi_mesh_instance == null:
 		return
@@ -217,8 +188,6 @@ func _get_relative_position(node_position : Vector3) -> Vector3:
 func _intersects(placeform : class_placeform) -> bool:
 	var relative_position := _get_relative_position(placeform.transform.origin)
 	return bounds.has_point(relative_position)
-	#TODO: Check bounds
-	#return bounds.intersects(value.bounds)
 
 
 func _get_octant_position(octant_index : int) -> Vector3:
@@ -311,7 +280,6 @@ func _create_debug_box():
 		_debug_mesh_instance = MeshInstance3D.new()
 		_debug_mesh_instance.mesh = BoxMesh.new()
 		add_child(_debug_mesh_instance)
-		#_debug_mesh_instance.owner = get_tree().get_edited_scene_root()
 		_debug_mesh_instance.name = "DebugBoxMeshInstance"
 	_debug_mesh_instance.position = Vector3.ZERO
 	_debug_mesh_instance.scale = bounds.size
