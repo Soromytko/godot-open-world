@@ -1,0 +1,51 @@
+[gd_resource type="Environment" load_steps=8 format=3 uid="uid://cx004xknlfdyr"]
+
+[ext_resource type="Shader" path="res://resources/shaders/cloudy_sky.gdshader" id="1_dkg2f"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vpqmj"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b2qjb"]
+seamless = true
+noise = SubResource("FastNoiseLite_vpqmj")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m0bv4"]
+seed = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t6i4w"]
+seamless = true
+noise = SubResource("FastNoiseLite_m0bv4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4k4m5"]
+shader = ExtResource("1_dkg2f")
+shader_parameter/sky_top_color = Color(0.372549, 0.584314, 0.792157, 1)
+shader_parameter/sky_horizon_color = Color(0.894118, 0.898039, 0.905882, 1)
+shader_parameter/sky_curve = 0.0430762
+shader_parameter/sky_energy = 1.0
+shader_parameter/sky_cover_modulate = Color(1, 1, 1, 1)
+shader_parameter/ground_bottom_color = Color(0.2, 0.169, 0.133, 1)
+shader_parameter/ground_horizon_color = Color(0.6463, 0.6558, 0.6708, 1)
+shader_parameter/ground_curve = 0.02
+shader_parameter/ground_energy = 1.0
+shader_parameter/sun_angle_max = 0.523599
+shader_parameter/sun_curve = 0.15
+shader_parameter/clouds_direction0 = Vector2(1, 1)
+shader_parameter/clouds_direction1 = Vector2(-1, 0)
+shader_parameter/cloud_scale = Vector2(2.5, 2.5)
+shader_parameter/clouds_movement_speed = 0.5
+shader_parameter/clouds_texture0 = SubResource("NoiseTexture2D_b2qjb")
+shader_parameter/clouds_texture1 = SubResource("NoiseTexture2D_t6i4w")
+
+[sub_resource type="Sky" id="Sky_8inl8"]
+sky_material = SubResource("ShaderMaterial_4k4m5")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_8inl8")
+fog_density = 0.0025
+fog_aerial_perspective = 0.818
+fog_sky_affect = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+volumetric_fog_length = 1024.0
+volumetric_fog_ambient_inject = 1.15
+volumetric_fog_sky_affect = 0.0
