@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://duevnodepou4h"]
+[gd_scene load_steps=10 format=3 uid="uid://duevnodepou4h"]
 
 [ext_resource type="Script" path="res://addons/bald_terrain/scripts/terrain.gd" id="1_hykmw"]
 [ext_resource type="Script" path="res://scripts/procedural_generation/arborist.gd" id="4_gwslp"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://dycupbm113sg8" path="res://demo/spatial_nature/resources/plants/grass/grass_plant.tres" id="6_u0llc"]
 [ext_resource type="PackedScene" uid="uid://xkaia20jo0vb" path="res://scenes/prefabs/third_person_player_and_camera.tscn" id="7_5v4pb"]
 [ext_resource type="Resource" uid="uid://dkm5nn31vqc5q" path="res://demo/spatial_nature/resources/plants/fir/fir_plant.tres" id="7_bp3ov"]
+[ext_resource type="Environment" uid="uid://cx004xknlfdyr" path="res://resources/environment/environmen.tres" id="8_22i2y"]
 
 [sub_resource type="GDScript" id="GDScript_wmyqv"]
 resource_name = "fps_control"
@@ -44,3 +45,6 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = SubResource("GDScript_wmyqv")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("8_22i2y")
