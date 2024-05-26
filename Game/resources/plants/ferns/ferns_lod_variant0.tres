@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://vjsmhsnj460w"]
+
+[ext_resource type="ArrayMesh" uid="uid://bkrjf38axslf4" path="res://resources/meshes/ferns/ferns_lod0.res" id="1_7iday"]
+[ext_resource type="Script" path="res://addons/spatial_nature/scripts/lod_variant.gd" id="2_k0eft"]
+
+[resource]
+script = ExtResource("2_k0eft")
+lod_distance = 5.0
+shadow_casting = 1
+mesh = ExtResource("1_7iday")

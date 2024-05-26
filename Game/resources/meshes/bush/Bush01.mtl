@@ -1,0 +1,24 @@
+# Blender 3.6.1 MTL File: 'None'
+# www.blender.org
+
+newmtl ST_Blades_1_Mat
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd D:/Program Files/SpeedTree/SpeedTree Cinema v8.1.3/Win64/ST_Blades_1.png
+map_d D:/Program Files/SpeedTree/SpeedTree Cinema v8.1.3/Win64/ST_Blades_1_Opacity.png
+map_Bump -bm 1.000000 D:/Program Files/SpeedTree/SpeedTree Cinema v8.1.3/Win64/ST_Blades_1_Normal.png
+
+newmtl ST_Blades_2_Mat
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd D:/Program Files/SpeedTree/SpeedTree Cinema v8.1.3/Win64/ST_Blades_2.png
+map_d D:/Program Files/SpeedTree/SpeedTree Cinema v8.1.3/Win64/ST_Blades_2_Opacity.png
+map_Bump -bm 1.000000 D:/Program Files/SpeedTree/SpeedTree Cinema v8.1.3/Win64/ST_Blades_2_Normal.png

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://eujoe5mr85dd"]
+
+[ext_resource type="Script" path="res://addons/spatial_nature/scripts/lod_variant.gd" id="1_fvxyw"]
+[ext_resource type="ArrayMesh" uid="uid://ddq46mb4852ma" path="res://resources/meshes/pine/pine_lod0.res" id="1_pee46"]
+
+[resource]
+script = ExtResource("1_fvxyw")
+lod_distance = 10.0
+shadow_casting = 1
+mesh = ExtResource("1_pee46")

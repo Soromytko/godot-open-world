@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cv82ubu6ebd17"]
+
+[ext_resource type="ArrayMesh" uid="uid://bpiugt5b6sr6c" path="res://resources/meshes/tall_pine/tall_pine_lod1.res" id="1_mt2nm"]
+[ext_resource type="Script" path="res://addons/spatial_nature/scripts/lod_variant.gd" id="2_grj0n"]
+
+[resource]
+script = ExtResource("2_grj0n")
+lod_distance = 50.0
+shadow_casting = 1
+mesh = ExtResource("1_mt2nm")

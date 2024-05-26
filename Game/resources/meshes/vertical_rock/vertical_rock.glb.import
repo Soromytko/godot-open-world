@@ -1,0 +1,67 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://dw5gyvq70ducv"
+path="res://.godot/imported/vertical_rock.glb-682cce6445f07cce606bed8e401da4db.scn"
+
+[deps]
+
+source_file="res://resources/meshes/vertical_rock/vertical_rock.glb"
+dest_files=["res://.godot/imported/vertical_rock.glb-682cce6445f07cce606bed8e401da4db.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"meshes": {
+"vertical_rock_Cube_004": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://resources/meshes/vertical_rock/vertical_rock_lod1.res"
+},
+"vertical_rock_Cube_005": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://resources/meshes/vertical_rock/vertical_rock_lod2.res"
+},
+"vertical_rock_Cube_014": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://resources/meshes/vertical_rock/vertical_rock_lod0.res"
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1
