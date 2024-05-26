@@ -45,7 +45,6 @@ script = ExtResource("4_gwslp")
 size = Vector3(512, 512, 512)
 heightmap = ExtResource("5_tk2y5")
 plants = Array[Resource("res://scripts/procedural_generation/plant.gd")]([ExtResource("4_142a1"), ExtResource("5_wu31y"), ExtResource("9_x7xre"), ExtResource("6_pqf2a"), ExtResource("7_k0lai"), ExtResource("8_km1rp")])
-bush_count = null
 
 [node name="Control" type="Label" parent="."]
 offset_right = 40.0
@@ -61,7 +60,7 @@ offset_left = 141.0
 offset_right = 181.0
 offset_bottom = 40.0
 scale = Vector2(3, 3)
-text = "36"
+text = "141"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = SubResource("GDScript_wmyqv")

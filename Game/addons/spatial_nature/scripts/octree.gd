@@ -37,7 +37,6 @@ func try_insert_placeform(placeform : class_placeform) -> bool:
 
 
 func update_lods():
-	#print(name, " ", count_instances())
 	_update_lod_recursively(_root_node, _get_camera().global_position)
 
 
@@ -56,7 +55,11 @@ func _update_lod_recursively(octree_node : class_octree_node, observer_position 
 
 
 func _count_nodes_recursively(octree_node : class_octree_node) -> int:
-	var result : int = octree_node.octants.size()
+	var result : int = 0;
+	for octant in octree_node.octants:
+		if octant.get_instance_count() > 0 && octant._multi_mesh_instance != null && \
+			octant._multi_mesh_instance.visible == true:
+				result += 1
 	for octant in octree_node.octants:
 		result += _count_nodes_recursively(octant)
 	return result
