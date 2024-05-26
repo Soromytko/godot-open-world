@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Plant" load_steps=6 format=3 uid="uid://dfo4bm2uw0ony"]
+
+[ext_resource type="Resource" uid="uid://baq468v7i1qq6" path="res://resources/plants/bush/bush_lod_variant_0.tres" id="1_ehluu"]
+[ext_resource type="Resource" uid="uid://btlursf8o2r8m" path="res://resources/plants/bush/bush_lod_variant_1.tres" id="2_a2loh"]
+[ext_resource type="Resource" uid="uid://ycukmco5ym8d" path="res://resources/plants/bush/bush_lod_variant_2.tres" id="3_w4e57"]
+[ext_resource type="Image" uid="uid://2rlekbdiqcuc" path="res://demo/spatial_nature/resources/textures/forest_noise.png" id="4_xyjgl"]
+[ext_resource type="Script" path="res://scripts/procedural_generation/plant.gd" id="5_n2wah"]
+
+[resource]
+resource_name = "Bush"
+script = ExtResource("5_n2wah")
+noise_map = ExtResource("4_xyjgl")
+frequency = 0.5
+frequency_degree = 1
+min_noise_value = 0.2
+min_size = 2.0
+max_size = 2.5
+octree_size = 512.0
+max_depth = 4
+node_capacity = 50
+lod_update_rate = 0.5
+max_lod_distance = 2.0
+is_killable_by_distance = true
+lod_variants = Array[Resource]([ExtResource("1_ehluu"), ExtResource("2_a2loh"), ExtResource("3_w4e57")])

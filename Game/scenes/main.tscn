@@ -1,13 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://duevnodepou4h"]
+[gd_scene load_steps=16 format=3 uid="uid://duevnodepou4h"]
 
 [ext_resource type="Script" path="res://addons/bald_terrain/scripts/terrain.gd" id="1_hykmw"]
+[ext_resource type="Resource" uid="uid://djx22oespn6k6" path="res://resources/plants/pine/pine_plant.tres" id="4_142a1"]
 [ext_resource type="Script" path="res://scripts/procedural_generation/arborist.gd" id="4_gwslp"]
 [ext_resource type="Image" uid="uid://vprb7d2svr4x" path="res://resources/terrain/heightmap_image.res" id="5_tk2y5"]
-[ext_resource type="Resource" uid="uid://cx2pyrglaui4a" path="res://demo/spatial_nature/resources/plants/bush/bush_plant.tres" id="6_mt8sd"]
-[ext_resource type="Resource" uid="uid://6je3j8wq2pgg" path="res://resources/nature/plants/grass/grass_plant.tres" id="6_pqf2a"]
+[ext_resource type="Resource" uid="uid://d1k13ci7dlwda" path="res://resources/plants/tall_pine/tall_pine_plant.tres" id="5_wu31y"]
+[ext_resource type="Resource" uid="uid://6je3j8wq2pgg" path="res://resources/plants/grass/grass_plant.tres" id="6_pqf2a"]
 [ext_resource type="PackedScene" uid="uid://xkaia20jo0vb" path="res://scenes/prefabs/third_person_player_and_camera.tscn" id="7_5v4pb"]
-[ext_resource type="Resource" uid="uid://dkm5nn31vqc5q" path="res://demo/spatial_nature/resources/plants/fir/fir_plant.tres" id="7_bp3ov"]
+[ext_resource type="Resource" uid="uid://02r0sillqrko" path="res://resources/plants/lopuh/lopuh_plant.tres" id="7_k0lai"]
 [ext_resource type="Environment" uid="uid://cx004xknlfdyr" path="res://resources/environment/environmen.tres" id="8_22i2y"]
+[ext_resource type="Resource" uid="uid://lro5cmt32bgt" path="res://resources/plants/ferns/ferns_plant.tres" id="8_km1rp"]
+[ext_resource type="Resource" uid="uid://dfo4bm2uw0ony" path="res://resources/plants/bush/bush_plant.tres" id="9_x7xre"]
+[ext_resource type="ArrayMesh" uid="uid://dw5gyvq70ducv" path="res://resources/meshes/vertical_rock/vertical_rock_lod0.res" id="12_lpr4g"]
+[ext_resource type="ArrayMesh" uid="uid://8q07yti881h0" path="res://resources/meshes/vertical_rock/vertical_rock_lod1.res" id="13_nmg0u"]
+[ext_resource type="ArrayMesh" uid="uid://c4uyxn7u165q7" path="res://resources/meshes/vertical_rock/vertical_rock_lod2.res" id="14_2fbmw"]
 
 [sub_resource type="GDScript" id="GDScript_wmyqv"]
 resource_name = "fps_control"
@@ -21,7 +27,7 @@ func _process(delta):
 [node name="Main" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.717069, -0.426601, 0.551202, -0.15832, 0.670457, 0.72486, -0.678784, -0.607041, 0.413224, 0, 30.9291, 0)
+transform = Transform3D(0.717069, -0.426602, 0.551202, -0.15832, 0.670457, 0.72486, -0.678784, -0.607041, 0.413224, 0, 30.9291, 0)
 shadow_enabled = true
 
 [node name="Terrain (BaldTerrain plugin)" type="Node3D" parent="."]
@@ -33,7 +39,7 @@ resource_directory = "res://resources/terrain"
 script = ExtResource("4_gwslp")
 size = Vector3(512, 512, 512)
 heightmap = ExtResource("5_tk2y5")
-plants = Array[Resource("res://scripts/procedural_generation/plant.gd")]([ExtResource("7_bp3ov"), ExtResource("6_mt8sd"), ExtResource("6_pqf2a")])
+plants = Array[Resource("res://scripts/procedural_generation/plant.gd")]([ExtResource("4_142a1"), ExtResource("5_wu31y"), ExtResource("9_x7xre"), ExtResource("6_pqf2a"), ExtResource("7_k0lai"), ExtResource("8_km1rp")])
 
 [node name="ThirdPersonPlayerAndCamera" parent="." instance=ExtResource("7_5v4pb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86956, 17.9605, -5.80699)
@@ -48,3 +54,15 @@ script = SubResource("GDScript_wmyqv")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("8_22i2y")
+
+[node name="VerticalRockLod0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5049, 13.8933, -11.8149)
+mesh = ExtResource("12_lpr4g")
+
+[node name="VerticalRockLod1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75188, 14.5697, -12.1888)
+mesh = ExtResource("13_nmg0u")
+
+[node name="VerticalRockLod2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.41139, 13.6651, -14.2521)
+mesh = ExtResource("14_2fbmw")

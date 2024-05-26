@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c871wgg0akxre"]
+
+[ext_resource type="Texture2D" uid="uid://jjucw0wiuqbf" path="res://resources/textures/vertial_rock/Rock_Diffuse.jpg" id="1_fbjlq"]
+[ext_resource type="Texture2D" uid="uid://sh6aee03e61k" path="res://resources/textures/vertial_rock/Rock_Normal.jpg" id="2_uenef"]
+
+[resource]
+albedo_texture = ExtResource("1_fbjlq")
+metallic_specular = 0.0
+normal_enabled = true
+normal_texture = ExtResource("2_uenef")

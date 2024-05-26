@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Plant" load_steps=6 format=3 uid="uid://d1k13ci7dlwda"]
+
+[ext_resource type="Resource" uid="uid://eujoe5mr85dd" path="res://resources/plants/pine/pine_lod_variant0.tres" id="1_h5tg3"]
+[ext_resource type="Resource" uid="uid://bmb2ptidha1hd" path="res://resources/plants/pine/pine_lod_variant1.tres" id="2_1qpkr"]
+[ext_resource type="Resource" uid="uid://cujdw61xjmg0" path="res://resources/plants/pine/pine_lod_variant2.tres" id="3_de1gq"]
+[ext_resource type="Image" uid="uid://2rlekbdiqcuc" path="res://demo/spatial_nature/resources/textures/forest_noise.png" id="4_yqr0r"]
+[ext_resource type="Script" path="res://scripts/procedural_generation/plant.gd" id="5_2lgw7"]
+
+[resource]
+resource_name = "Tall Pine"
+script = ExtResource("5_2lgw7")
+noise_map = ExtResource("4_yqr0r")
+frequency = 0.1
+frequency_degree = 1
+min_noise_value = 0.1
+min_size = 1.0
+max_size = 2.2
+octree_size = 512.0
+max_depth = 4
+node_capacity = 50
+lod_update_rate = 0.5
+max_lod_distance = 2.0
+is_killable_by_distance = true
+lod_variants = Array[Resource]([ExtResource("1_h5tg3"), ExtResource("2_1qpkr"), ExtResource("3_de1gq")])

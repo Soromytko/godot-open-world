@@ -5,6 +5,6 @@
 
 [resource]
 script = ExtResource("2_p4rh4")
-type = 1
+type = 2
 is_stackable = true
 icon = ExtResource("1_d8i6x")
