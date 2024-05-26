@@ -37,6 +37,7 @@ func try_insert_placeform(placeform : class_placeform) -> bool:
 
 
 func update_lods():
+	#print(name, " ", count_instances())
 	_update_lod_recursively(_root_node, _get_camera().global_position)
 
 

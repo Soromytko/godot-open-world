@@ -57,12 +57,23 @@ func _clear():
 	_init_octrees()
 
 
+@export var pine_count : int
+@export var grass_count : int
+@export var bush_count : int
+
 func _update_all_trees_lods():
 	for tree in _octrees:
 		tree.update_lods()
 
 
 func _on_update_lods(octree : class_octree):
+	print("AAAAAAAAAA")
+	if octree.name.contains("Pine"):
+		print(octree.name, " ", octree.count_instances())
+	elif octree.name.contains("Bush"):
+		print(octree.name, " ", octree.count_instances())
+	elif octree.name.contains("Grass"):
+		print(octree.name, " ", octree.count_instances())
 	octree.update_lods()
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://duevnodepou4h"]
+[gd_scene load_steps=17 format=3 uid="uid://duevnodepou4h"]
 
 [ext_resource type="Script" path="res://addons/bald_terrain/scripts/terrain.gd" id="1_hykmw"]
 [ext_resource type="Resource" uid="uid://djx22oespn6k6" path="res://resources/plants/pine/pine_plant.tres" id="4_142a1"]
@@ -6,22 +6,27 @@
 [ext_resource type="Image" uid="uid://vprb7d2svr4x" path="res://resources/terrain/heightmap_image.res" id="5_tk2y5"]
 [ext_resource type="Resource" uid="uid://d1k13ci7dlwda" path="res://resources/plants/tall_pine/tall_pine_plant.tres" id="5_wu31y"]
 [ext_resource type="Resource" uid="uid://6je3j8wq2pgg" path="res://resources/plants/grass/grass_plant.tres" id="6_pqf2a"]
-[ext_resource type="PackedScene" uid="uid://xkaia20jo0vb" path="res://scenes/prefabs/third_person_player_and_camera.tscn" id="7_5v4pb"]
 [ext_resource type="Resource" uid="uid://02r0sillqrko" path="res://resources/plants/lopuh/lopuh_plant.tres" id="7_k0lai"]
 [ext_resource type="Environment" uid="uid://cx004xknlfdyr" path="res://resources/environment/environmen.tres" id="8_22i2y"]
 [ext_resource type="Resource" uid="uid://lro5cmt32bgt" path="res://resources/plants/ferns/ferns_plant.tres" id="8_km1rp"]
 [ext_resource type="Resource" uid="uid://dfo4bm2uw0ony" path="res://resources/plants/bush/bush_plant.tres" id="9_x7xre"]
+[ext_resource type="Script" path="res://resources/plants/bush/set_color.gd" id="10_7yoju"]
 [ext_resource type="ArrayMesh" uid="uid://dw5gyvq70ducv" path="res://resources/meshes/vertical_rock/vertical_rock_lod0.res" id="12_lpr4g"]
 [ext_resource type="ArrayMesh" uid="uid://8q07yti881h0" path="res://resources/meshes/vertical_rock/vertical_rock_lod1.res" id="13_nmg0u"]
 [ext_resource type="ArrayMesh" uid="uid://c4uyxn7u165q7" path="res://resources/meshes/vertical_rock/vertical_rock_lod2.res" id="14_2fbmw"]
+[ext_resource type="PackedScene" uid="uid://c7jake3jwj74c" path="res://scenes/prefabs/camera/free_camera.tscn" id="14_nt14j"]
 
 [sub_resource type="GDScript" id="GDScript_wmyqv"]
 resource_name = "fps_control"
-script/source = "extends Label
+script/source = "@tool
+extends Label
 
+@export var color : Color
 
 func _process(delta):
 	text = str(Engine.get_frames_per_second())
+	modulate = color
+	
 "
 
 [node name="Main" type="Node3D"]
@@ -40,17 +45,67 @@ script = ExtResource("4_gwslp")
 size = Vector3(512, 512, 512)
 heightmap = ExtResource("5_tk2y5")
 plants = Array[Resource("res://scripts/procedural_generation/plant.gd")]([ExtResource("4_142a1"), ExtResource("5_wu31y"), ExtResource("9_x7xre"), ExtResource("6_pqf2a"), ExtResource("7_k0lai"), ExtResource("8_km1rp")])
-
-[node name="ThirdPersonPlayerAndCamera" parent="." instance=ExtResource("7_5v4pb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86956, 17.9605, -5.80699)
+bush_count = null
 
 [node name="Control" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
-text = "0"
+scale = Vector2(3, 3)
+text = "FPS:"
+vertical_alignment = 1
+script = ExtResource("10_7yoju")
+
+[node name="Control2" type="Label" parent="."]
+modulate = Color(0, 1, 0, 1)
+offset_left = 141.0
+offset_right = 181.0
+offset_bottom = 40.0
+scale = Vector2(3, 3)
+text = "36"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = SubResource("GDScript_wmyqv")
+color = Color(0, 1, 0, 1)
+
+[node name="PineCount" type="Label" parent="."]
+offset_top = 60.0
+offset_right = 123.0
+offset_bottom = 100.0
+scale = Vector2(3, 3)
+text = "Pine trees: 3159"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("10_7yoju")
+
+[node name="BushCount" type="Label" parent="."]
+offset_top = 180.0
+offset_right = 40.0
+offset_bottom = 220.0
+scale = Vector2(3, 3)
+text = "Bushes: 7890"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("10_7yoju")
+
+[node name="TallPineCount" type="Label" parent="."]
+offset_top = 116.0
+offset_right = 154.0
+offset_bottom = 156.0
+scale = Vector2(3, 3)
+text = "Tall pine trees: 1585"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("10_7yoju")
+
+[node name="GrassCount" type="Label" parent="."]
+offset_top = 243.0
+offset_right = 107.0
+offset_bottom = 283.0
+scale = Vector2(3, 3)
+text = "Grass: 111092"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("10_7yoju")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("8_22i2y")
@@ -66,3 +121,6 @@ mesh = ExtResource("13_nmg0u")
 [node name="VerticalRockLod2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.41139, 13.6651, -14.2521)
 mesh = ExtResource("14_2fbmw")
+
+[node name="FreeCamera3D" parent="." instance=ExtResource("14_nt14j")]
+transform = Transform3D(0.791224, -0.100931, 0.60314, 0, 0.986286, 0.165048, -0.611527, -0.13059, 0.780373, 0, 35.0905, 0)
