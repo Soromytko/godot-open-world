@@ -1,6 +1,5 @@
-# Survival simulator prototype
-
-This is a prototype survival simulator game made with Godot.
+# What's it?
+This is a Godot project that includes several plugins to implement an open world game. These developments are based on articles and tutorials from open access.
 The goal of this project is to implement systems and mechanics inherent in most games in the survival/sandbox genre.
 
 # Demo
